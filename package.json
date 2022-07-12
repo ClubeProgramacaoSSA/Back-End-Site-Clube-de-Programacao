@@ -1,0 +1,35 @@
+{
+  "name": "back-end-clube-programacao",
+  "version": "1.0.0",
+  "description": "Rest Api feita pelos os integrantes do clube, para a realização do back-end do site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClubeProgramacaoSSA/Back-End-Site-Clube-de-Programacao.git"
+  },
+  "keywords": [
+    "node",
+    "clube",
+    "api"
+  ],
+  "author": "Antonio Horacio, Fernando Schettini, Orlando Mota, Pedro Barros, Pedro Facundes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ClubeProgramacaoSSA/Back-End-Site-Clube-de-Programacao/issues"
+  },
+  "homepage": "https://github.com/ClubeProgramacaoSSA/Back-End-Site-Clube-de-Programacao#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
