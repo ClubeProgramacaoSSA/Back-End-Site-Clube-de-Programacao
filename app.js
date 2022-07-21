@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-
+const routeTeste = require('./routes/teste');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -21,11 +21,7 @@ app.use((req, res, next) => {
 
 
 
-app.use('/teste', (req, res, next) => {
-    return res.status(200).send({
-        mensagem: "Ok deu certo o teste"
-    })
-});
+app.use('/teste', routeTeste);
 
 
 

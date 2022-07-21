@@ -1,6 +1,6 @@
-const pg = require('pg');
+const {Pool} = require('pg');
 
-const pool = pg.Pool({
+const pool = new Pool({
     user: process.env.POSTGRE_USER,
     host: process.env.POSTGRE_HOST,
     database: process.env.POSTGRE_DATABASE,
@@ -8,3 +8,24 @@ const pool = pg.Pool({
     port: process.env.POSTGRE_PORT
 });
 
+function executeQuerySql(query, params=[]){
+    return new Promise((resolve, reject) => {
+        pool.connect((error, client, done)=> {
+            if(error){
+                reject(error);
+            }else{
+                client.query(query, params, (errorClient, response) => {
+                    done();
+                    if(errorClient){
+                        reject(errorClient);
+                    }else{
+                        resolve(response);
+                    }
+    
+                });
+            }
+            
+        });
+    });
+}
+exports.executeQuerySql = executeQuerySql;
