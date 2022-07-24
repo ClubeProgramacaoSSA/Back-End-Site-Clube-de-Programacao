@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const routeTeste = require('./routes/teste');
 const routeTeams = require('./routes/teams');
+const routeTournament = require('./routes/tournament');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -23,7 +24,7 @@ app.use((req, res, next) => {
 
 app.use('/equipe', routeTeams);
 app.use('/teste', routeTeste);
-
+app.use('/torneio', routeTournament);
 
 app.use((req, res, next) => {
     const error = new Error();
