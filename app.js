@@ -2,11 +2,18 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const routeTeste = require('./routes/teste');
-const routeTeams = require('./routes/teams');
+
+
+const routeMemberDelection = require('./routes/memberDelection');
+const routeMemberLogin = require('./routes/memberLogin');
+const routeTeamRegistration = require('./routes/teamRegistration');
+
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header(
@@ -21,8 +28,9 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/equipe', routeTeams);
-app.use('/teste', routeTeste);
+app.use('/memberDelection', routeMemberDelection);
+app.use('/memberLogin', routeMemberLogin);
+app.use('/teamRegistration', routeTeamRegistration);
 
 
 app.use((req, res, next) => {
