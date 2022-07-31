@@ -1,4 +1,4 @@
-const postgre = require('../postgre');
+import postgre from '../service/postgre';
 
 exports.getTeste = async (req, res, next) => {
     try{

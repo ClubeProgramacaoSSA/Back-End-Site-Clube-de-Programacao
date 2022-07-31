@@ -1,4 +1,4 @@
-const {Pool} = require('pg');
+import {Pool} from 'pg';
 
 const pool = new Pool({
     user: process.env.POSTGRE_USER,
@@ -8,7 +8,7 @@ const pool = new Pool({
     port: process.env.POSTGRE_PORT
 });
 
-function executeQuerySql(query, params=[]){
+export function executeQuerySql(query, params=[]){
     return new Promise((resolve, reject) => {
         pool.connect((error, client, done)=> {
             if(error){
@@ -28,4 +28,3 @@ function executeQuerySql(query, params=[]){
         });
     });
 }
-exports.executeQuerySql = executeQuerySql;
