@@ -1,5 +1,5 @@
-const postgre = require('../postgre');
-exports.getTeams = async (req, res, next) => {
+import postgre from '../service/postgre';
+export const getTeams = async (req, res, next) => {
     try{
         const responseData = await postgre.executeQuerySql("SELECT * FROM TB_EQUIPE;");
         return res.status(200).send({response: responseData.rows});
@@ -7,7 +7,7 @@ exports.getTeams = async (req, res, next) => {
         return res.status(500).send({error: error});
     }
 }
-exports.getTeam = async (req, res, next) => {
+export const getTeam = async (req, res, next) => {
     const id_team = req.params.id_equipe;
     try {
         const responseData = await postgre.executeQuerySql(
