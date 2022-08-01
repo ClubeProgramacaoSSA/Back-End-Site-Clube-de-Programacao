@@ -1,8 +1,9 @@
-const express = require('express');
-const routes = express.Router();
-const tournamentController = require('../controllers/tournamentController');
-routes.get('/', tournamentController.getTeamInTournament)
+import { Router } from 'express';
+const routes = Router();
+import { getTeamInTournament } from '../controllers/tournamentController.js';
+
+routes.post('/', getTeamInTournament);
 
 
 
-module.exports = routes;
+export {routes};

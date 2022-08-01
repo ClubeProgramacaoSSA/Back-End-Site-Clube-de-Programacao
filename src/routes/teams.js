@@ -5,4 +5,4 @@ import teamsController from '../controllers/teamsController';
 routes.get('/', teamsController.getTeams);
 routes.get('/:id_equipe', teamsController.getTeam);
 
-export default routes;
+export {routes};

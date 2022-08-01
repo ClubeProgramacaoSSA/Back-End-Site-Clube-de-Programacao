@@ -1,9 +1,9 @@
 import { Router } from 'express';
-const routes = Router();
-import controllesTest from '../controllers/controllerTeste';
+const testRouter = Router();
+import {getTeste} from '../controllers/controllerTeste.js';
 
 
-routes.get('/', controllesTest.getTeste);
+testRouter.get('*', getTeste);
 
 
-export default routes;
+export {testRouter};

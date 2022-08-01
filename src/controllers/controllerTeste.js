@@ -1,8 +1,8 @@
-import postgre from '../service/postgre';
+import { executeQuerySql } from '../service/postgre.js';
 
-exports.getTeste = async (req, res, next) => {
+export const getTeste = async (req, res, next) => {
     try{
-        const responseData = await postgre.executeQuerySql("SELECT * FROM tb_exem;");
+        const responseData = await executeQuerySql("SELECT * FROM tb_assunto;");
         res.status(200).send({resp: responseData.rows});
     }catch(error){
         res.status(500).send({error: error});

@@ -1,12 +1,14 @@
-import {Pool} from 'pg';
+import pg from 'pg';
 
-const pool = new Pool({
+const poolObj = {
     user: process.env.POSTGRE_USER,
     host: process.env.POSTGRE_HOST,
     database: process.env.POSTGRE_DATABASE,
     password: process.env.POSTGRE_PASSWORD,
     port: process.env.POSTGRE_PORT
-});
+}
+console.log(poolObj)
+const pool = new pg.Pool(poolObj);
 
 export function executeQuerySql(query, params=[]){
     return new Promise((resolve, reject) => {
@@ -15,12 +17,13 @@ export function executeQuerySql(query, params=[]){
                 reject(error);
             }else{
                 client.query(query, params, (errorClient, response) => {
-                    done();
                     if(errorClient){
                         reject(errorClient);
-                    }else{
-                        resolve(response);
                     }
+                    
+                    resolve(response);
+                    
+                    done();
     
                 });
             }
