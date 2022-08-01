@@ -1,7 +1,7 @@
-const express = require('express');
+import { Router } from 'express';
 const routes = express.Router();
-const memberDelectionController = require('../controllers/memberDelectionController');
+import memberDelectionController from '../controllers/memberDelectionController';
 
 routes.delete('/:id_membro', memberDelectionController.deleteMember);
 
-module.exports = routes;
+export { routes };
