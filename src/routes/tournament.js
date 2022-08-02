@@ -1,9 +1,7 @@
 import { Router } from 'express';
+import { tournamentController } from '../controllers/tournamentController.js';
 const routes = Router();
-import { getTeamInTournament } from '../controllers/tournamentController.js';
 
-routes.post('/', getTeamInTournament);
-
-
+routes.post('/', tournamentController.getTeamInTournament);
 
 export {routes};

@@ -2,9 +2,11 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors'
-import {testRouter} from './routes/teste.js'
-import { routes } from './routes/tournament.js';
-// import routeTeams from './src/routes/teams';
+
+//import { testRouter } from './routes/teste.js'
+import { routeTournament } from './routes/tournament.js';
+import { routeMember } from './routes/member'
+import { routeTeam } from './src/routes/team';
 
 const app = express();
 
@@ -12,6 +14,8 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
+
+
 // Sets default header, but express already do this?
 app.use((req, res, next) => {
     req.header('Access-Control-Allow-Origin', '*');
@@ -22,11 +26,13 @@ app.use((req, res, next) => {
     req.quack = true;
     next();
 });
-app.use('/tournament',routes )
-app.use('/test',testRouter);
 
-// app.use('/equipe', routeTeams);
-// app.use('/teste', routeTeste);
+
+//app.use('/test', testRouter);
+app.use('/tournament', routeTournament);
+app.use('/member', routeMember);
+app.use('/team', routeTeam);
+
 
 app.get('/',(req,res) => {
     res.send('hasQuack:'+ Boolean(req.quack));
