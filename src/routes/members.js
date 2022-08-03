@@ -1,7 +1,8 @@
 import { Router } from 'express';
 const membersRouter = express.Router();
-import memberDelectionController from '../controllers/memberDelectionController';
+import {deleteMember, postLogin} from '../controllers/membersController';
 
-membersRouter.delete('/:id_membro', memberDelectionController.deleteMember);
+membersRouter.post('/', postLogin)
+membersRouter.delete('/:id_membro', deleteMember);
 
 export { membersRouter };
