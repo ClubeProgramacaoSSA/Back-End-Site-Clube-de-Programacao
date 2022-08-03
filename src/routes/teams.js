@@ -1,8 +1,8 @@
 import { Router } from 'express';
-const routes = Router();
+const teamsRouter = Router();
 import teamsController from '../controllers/teamsController';
 
-routes.get('/', teamsController.getTeams);
-routes.get('/:id_equipe', teamsController.getTeam);
+teamsRouter.get('/', teamsController.getTeams);
+teamsRouter.get('/:id_equipe', teamsController.getTeam);
 
-export {routes};
+export {teamsRouter};

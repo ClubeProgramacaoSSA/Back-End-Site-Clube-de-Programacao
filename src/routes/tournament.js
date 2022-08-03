@@ -1,9 +1,9 @@
 import { Router } from 'express';
-const routes = Router();
+const tournamentRouter = Router();
 import { getTeamInTournament } from '../controllers/tournamentController.js';
 
-routes.post('/', getTeamInTournament);
+tournamentRouter.post('/', getTeamInTournament);
 
 
 
-export {routes};
+export { tournamentRouter };

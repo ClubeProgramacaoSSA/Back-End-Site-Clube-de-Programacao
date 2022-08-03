@@ -2,7 +2,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors'
-import {testRouter} from './routes/teste.js'
+import { testRouter } from './routes/teste.js'
 import { routes } from './routes/tournament.js';
 // import routeTeams from './src/routes/teams';
 

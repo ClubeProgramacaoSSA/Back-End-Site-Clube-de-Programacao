@@ -1,14 +1,13 @@
-const postgre = require('../postgre');
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import {executeQuerySql} from '../service/postgre'
 
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-exports.postLogin = async (req, res, next) => {
+export const postLogin = async (req, res, next) => {
     const query = `SELECT * FROM TB_membro WHERE login = $1`;
     try{
-        const responseData = await postgre.executeQuerySql(query , [req.body.login]);
+        const responseData = await executeQuerySql(query , [req.body.login]);
       
-            if(responseData.rows.length < 1){return res.status(401).send({mensagem: 'Falha na autenticacao'})};
+            if(responseData.rows.length < 1) return res.status(401).send( {mensagem: 'Falha na autenticacao'} ) ;
 
             bcrypt.compare(req.body.senha, responseData.rows[0].senha, (err, result) => {
                 
@@ -34,6 +33,16 @@ exports.postLogin = async (req, res, next) => {
                 return res.status(401).send({mensagem: 'Falha na autenticacao'})
             });     
 
+    }catch(error){
+        return res.status(500).send({error: error});
+    }
+}
+export const deleteMember = async (req, res, next) => {
+    const id_member = req.params.id_membro;
+    try{
+        const responseData = await executeQuerySql(
+            "DELETE FROM TB_MEMBRO WHERE ID_MEMBRO = $1" , [id_member]);
+        return res.status(200).send({response: responseData.rows[0]});
     }catch(error){
         return res.status(500).send({error: error});
     }
