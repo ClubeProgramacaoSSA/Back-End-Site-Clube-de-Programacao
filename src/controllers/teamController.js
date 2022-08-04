@@ -1,4 +1,4 @@
-import postgre from '../service/postgre';
+import postgre from '../service/postgre' ;
 
 export const getTeams = async (req, res, next) => {
     try{

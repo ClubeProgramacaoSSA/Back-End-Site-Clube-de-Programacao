@@ -1,7 +1,6 @@
-const postgre = require('../postgre');
-
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import postgre from '../postgre' ;
+import bcrypt from 'bcrypt' ;
+import jwt from 'jsonwebtoken' ;
 
 exports.deleteMember = async (req, res, next) => {
     const id_member = req.params.id_membro;
