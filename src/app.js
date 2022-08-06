@@ -2,8 +2,8 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors'
-import {testRouter} from './routes/teste.js'
-import { routes } from './routes/tournament.js';
+import { testRouter } from './routes/teste.js'
+import { tournamentRouter } from './routes/tournament.js';
 // import routeTeams from './src/routes/teams';
 
 const app = express();
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     req.quack = true;
     next();
 });
-app.use('/tournament',routes )
+app.use('/tournament',tournamentRouter )
 app.use('/test',testRouter);
 
 // app.use('/equipe', routeTeams);
