@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-
+const routeTeste = require('./routes/teste');
+const routeMembers = require('./routes/members');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -20,13 +21,22 @@ app.use((req, res, next) => {
 });
 
 
+app.use('/membro', routeMembers);
+app.use('/teste', routeTeste);
 
-app.use('/teste', (req, res, next) => {
-    return res.status(200).send({
-        mensagem: "Ok deu certo o teste"
-    })
+
+app.use((req, res, next) => {
+    const error = new Error();
+    error.status = 404;
+    error.message = 'Não foi encontrado a rota especificada';
+    next(error);
 });
 
-
+app.use((error, req, res, next) => {
+    res.status(error.status || 500);
+    return res.send({
+        error: error
+    });
+});
 
 module.exports = app;
