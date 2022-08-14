@@ -1,7 +1,17 @@
-const postgre = require('../postgre');
+import postgre from '../postgre' ;
+import bcrypt from 'bcrypt' ;
+import jwt from 'jsonwebtoken' ;
 
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+exports.deleteMember = async (req, res, next) => {
+    const id_member = req.params.id_membro;
+    try{
+        const responseData = await postgre.executeQuerySql(
+            "DELETE FROM TB_MEMBRO WHERE ID_MEMBRO = $1" , [id_member]);
+        return res.status(200).send({response: responseData.rows[0]});
+    }catch(error){
+        return res.status(500).send({error: error});
+    }
+}
 
 exports.postLogin = async (req, res, next) => {
     const query = `SELECT * FROM TB_membro WHERE login = $1`;
@@ -38,3 +48,4 @@ exports.postLogin = async (req, res, next) => {
         return res.status(500).send({error: error});
     }
 }
+

@@ -1,9 +1,7 @@
 import { Router } from 'express';
+import { getTeste } from '../controllers/controllerTeste.js';
 const testRouter = Router();
-import {getTeste} from '../controllers/controllerTeste.js';
-
 
 testRouter.get('*', getTeste);
-
 
 export {testRouter};
