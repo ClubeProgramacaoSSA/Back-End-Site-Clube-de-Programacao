@@ -8,6 +8,7 @@ export const getTeams = async (req, res, next) => {
         const responseData = await executeQuerySql("SELECT * FROM TB_EQUIPE;");
         return res.status(200).send({response: responseData.rows});
     }catch(error){
+        if(error.code === "ECONNREFUSED") return res.status(403).send({message:'Database recusou essa conexão!',error: error});
         return res.status(500).send({error: error});
     }
 }
