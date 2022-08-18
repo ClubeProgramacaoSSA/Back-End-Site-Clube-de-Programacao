@@ -1,25 +1,17 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import morgan from 'morgan';
 import cors from 'cors'
 
 import { testRouter } from './routes/teste.js'
 import { tournamentRouter } from './routes/tournament.js';
-// import routeTeams from './src/routes/teams';
-
-
-//import { testRouter } from './routes/teste.js'
-import { routeTournament } from './routes/tournament.js';
-import { routeMember } from './routes/member'
-import { routeTeam } from './src/routes/team';
+import { membersRouter } from './routes/member.js'
+import { teamRouter } from './routes/team.js';
 
 const app = express();
 
-app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
-
 
 // Sets default header, but express already do this?
 app.use((req, res, next) => {
@@ -32,15 +24,11 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/tournament',tournamentRouter )
 app.use('/test',testRouter);
-
-
-
 //app.use('/test', testRouter);
-app.use('/tournament', routeTournament);
-app.use('/member', routeMember);
-app.use('/team', routeTeam);
+app.use('/tournament', tournamentRouter);
+app.use('/member', membersRouter);
+app.use('/team', teamRouter);
 
 
 app.get('/',(req,res) => {

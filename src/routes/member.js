@@ -1,9 +1,9 @@
 import { Router } from 'express';
-const routes = express.Router();
+const membersRouter = Router();
 
-import memberController from '../controllers/memberLoginController';
+import { deleteMember,postLogin } from '../controllers/memberController.js';
 
-routes.delete('/:id_membro', memberController.deleteMember);
-routes.post('/', memberController.postLogin);
+membersRouter.delete('/:id_membro', deleteMember);
+membersRouter.post('/', postLogin);
 
-export {routes};
+export {membersRouter};

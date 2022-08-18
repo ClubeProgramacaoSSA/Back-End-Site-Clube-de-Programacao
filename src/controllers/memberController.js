@@ -1,8 +1,8 @@
-import postgre from '../postgre' ;
+import { executeQuerySql } from '../service/postgre.js' ;
 import bcrypt from 'bcrypt' ;
 import jwt from 'jsonwebtoken' ;
 
-exports.deleteMember = async (req, res, next) => {
+export const deleteMember = async (req, res, next) => {
     const id_member = req.params.id_membro;
     try{
         const responseData = await postgre.executeQuerySql(
@@ -13,7 +13,7 @@ exports.deleteMember = async (req, res, next) => {
     }
 }
 
-exports.postLogin = async (req, res, next) => {
+export const postLogin = async (req, res, next) => {
     const query = `SELECT * FROM TB_membro WHERE login = $1`;
     try{
         const responseData = await postgre.executeQuerySql(query , [req.body.login]);

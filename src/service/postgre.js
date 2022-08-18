@@ -24,28 +24,34 @@ export const createClientConnection = () => {
 
             doneFn = done;
             PG_CLIENT = client;
-            return resolve(client);
+            resolve(client);
         })
     })
 }
 
 export function executeQuerySql(query, params=[]){
-    if(!PG_CLIENT) {
-        throw new Error('No client!!'); 
-    }
-
     return new Promise((resolve, reject) => {
-        
-        PG_CLIENT.query(query, params, (errorClient, response) => {
-            if(errorClient){
-                reject(errorClient);
+        pool.connect((error, client, done)=> {
+            if(error){
+                reject(error);
+                return done();
             }
-                    
-            resolve(response);
+
+            client.query(query, params, (errorClient, response) => {
+                if(errorClient){
+                    reject(errorClient);
+                    done();
+                }
+                        
+                resolve(response);
+            });
+            // doneFn = done;
+            // PG_CLIENT = client;
+            // resolve(client);
         });
-    })
-          
+    });
 }
+
 export const killConnection = () => {
     if(!doneFn) throw new Error('No Connection!')
     return doneFn();

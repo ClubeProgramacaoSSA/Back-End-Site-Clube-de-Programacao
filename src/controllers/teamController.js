@@ -1,7 +1,6 @@
 
-import { executeQuerySql } from '../service/postgre';
+import { executeQuerySql } from '../service/postgre.js';
 
-import postgre from '../service/postgre' ;
 
 
 export const getTeams = async (req, res, next) => {
@@ -25,9 +24,9 @@ export const getTeam = async (req, res, next) => {
     }
 }
 
-exports.postTeam = async (req, res, next) => {
+export const postTeam = async (req, res, next) => {
     try{
-        const responseData = await postgre.executeQuerySql(
+        const responseData = await executeQuerySql(
 
             "INSERT INTO TB_equipe (ID_equipe, nome, capitao, DT_criacao) VALUES ($1, $2, $3, $4)", 
             [req.body.ID_equipe, req.body.nome, req.body.capitao, req.body.DT_criacao]);
@@ -36,4 +35,4 @@ exports.postTeam = async (req, res, next) => {
     }catch(error){
         return res.status(500).send({error: error});
     }
-}
+};
