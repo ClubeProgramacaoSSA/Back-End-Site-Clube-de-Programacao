@@ -7,4 +7,4 @@ teamRouter.post('/', postTeam);
 teamRouter.get('/', getTeams);
 teamRouter.get('/:id_equipe', getTeam);
 
-export {teamRouter};
+export { teamRouter };

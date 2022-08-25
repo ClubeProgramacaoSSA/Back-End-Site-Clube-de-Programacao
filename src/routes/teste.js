@@ -4,4 +4,4 @@ const testRouter = Router();
 
 testRouter.get('*', getTeste);
 
-export {testRouter};
+export { testRouter };
