@@ -1,7 +1,4 @@
-
 import { executeQuerySql } from '../service/postgre.js';
-
-
 
 export const getTeams = async (req, res, next) => {
     try{
@@ -24,6 +21,19 @@ export const getTeam = async (req, res, next) => {
         return res.status(500).send({error: error});
     }
 }
+export const deleteTeam = async (req, res, next) => {
+    const { id } = req.params;
+    
+    executeQuerySql("SELECT * FROM TB_EQUIPE WHERE ID_equipe = $1", [id])
+        .then((data) => res.status(200).send({ok:true}))
+        .catch((err) => res.status(500).send({ok:false, err}));
+
+    }
+// export const alterTeamById = async (req,res,next) => {
+//     const { id } = rq.params;
+//     const field = { nome, capitao }
+//     executeQuerySql("UPDATE * FROM TB_EQUIPE;")  
+// }
 
 export const postTeam = async (req, res, next) => {
     try{

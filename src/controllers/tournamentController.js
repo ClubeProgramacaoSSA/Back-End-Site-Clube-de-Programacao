@@ -1,19 +1,19 @@
 import { executeQuerySql } from '../service/postgre.js';
 
 export const getTournaments = (req, res, next) => {
-    const query = "SELECT * from TB_torneio";
+    const query = "SELECT * from TB_torneio;";
 
     
-    const responseData = executeQuerySql( query )
+    executeQuerySql( query )
         .then((data) => res.status(200).send( {tournaments: data.rows, quack:req.quack }))
         .catch((err) => res.status(500).send(err));
 }
 
 export const getTournamentById = (req, res, next) => {
     const { id } = req.params;
-    const query = "SELECT * FROM TB_torneio WHERE ID_torneio = $1";
+    const query = "SELECT * FROM TB_torneio WHERE ID_torneio = $1;";
 
-    const responseData = executeQuerySql( query, [id] )
+    executeQuerySql( query, [id] )
         .then((data) => res.status(200).send( {tournament: data.rows, quack:req.quack }))
         .catch((err) => res.status(500).send(err));
 }
