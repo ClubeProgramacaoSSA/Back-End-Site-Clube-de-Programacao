@@ -20,7 +20,7 @@ export const getTeam = async (req, res, next) => {
     }catch(error){
         return res.status(500).send({error: error});
     }
-})
+}
 export const deleteTeam = async (req, res, next) => {
     const { id } = req.params;
     
