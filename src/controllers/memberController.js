@@ -15,6 +15,7 @@ export const deleteMember = async (req, res, next) => {
 
 export const postLogin = async (req, res, next) => {
     const query = `SELECT * FROM TB_membro WHERE login = $1`;
+    
     try{
         const responseData = await executeQuerySql(query , [req.body.login]);
       

@@ -1,17 +1,18 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import cors from 'cors'
+import cors from 'cors';
 
-import { testRouter } from './routes/teste.js'
-import { tournamentRouter } from './routes/tournament.js';
-import { membersRouter } from './routes/member.js'
-import { teamRouter } from './routes/team.js';
+import { testRouter } from './routes/teste';
+import { tournamentRouter } from './routes/tournament';
+import { membersRouter } from './routes/member';
+import { teamRouter } from './routes/team';
+import { projectsrouter } from './routes/projects';
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-app.use(cors());
+app.use( bodyParser.urlencoded({extended: false}) );
+app.use( bodyParser.json() );
+app.use( cors() );
 
 // Sets default header, but express already do this?
 app.use((req, res, next) => {
@@ -24,11 +25,12 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/test',testRouter);
-//app.use('/test', testRouter);
-app.use('/tournament', tournamentRouter);
-app.use('/member', membersRouter);
-app.use('/team', teamRouter);
+// app.use('/test',testRouter);
+// app.use('/test', testRouter);
+// app.use('/tournament', tournamentRouter);
+// app.use('/member', membersRouter);
+// app.use('/team', teamRouter);
+app.use('/projects', projectsrouter);
 
 
 app.get('/',(req,res) => {

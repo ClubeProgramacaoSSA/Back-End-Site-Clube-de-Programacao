@@ -1,8 +1,8 @@
-const express = require('express');
-const routes = express.Router();
-const projectsController = require('../controllers/projects');
+import { Router } from 'express'
+const projectsRouter = Router();
+import { getProject, getProjects, postProject, putProject} from '../controllers/projectsController';
 
-routes.get('/', projectsController.getProjects);
-routes.get('/:id_project', teamsController.getProjects);
+projectsRouter.get('/', getProjects);
+projectsRouter.get('/:id_project', getProject);
 
-module.exports = routes;
+export { projectsRouter };

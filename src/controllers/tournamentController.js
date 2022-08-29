@@ -13,7 +13,7 @@ export const getTournamentById = (req, res, next) => {
     const { id } = req.params;
     const query = "SELECT * FROM TB_torneio WHERE ID_torneio = $1;";
 
-    executeQuerySql( query, [id] )
+    executeQuerySql( query, [ id ] )
         .then((data) => res.status(200).send( {tournament: data.rows, quack:req.quack }))
         .catch((err) => res.status(500).send(err));
 }
