@@ -1,5 +1,6 @@
 import { Router, IRouter,Application } from 'express';
 import { Route } from '../Models';
+import { testRouter } from '../Routes/Test';
 
 export class MainRouter implements Route {
     router = Router();
@@ -16,8 +17,9 @@ export class MainRouter implements Route {
     }
     // add the other routes right here!
     public initRoute() {
-        this.router.use('/',(req,res) => res.json({id:1,message:"Hello Broda"}))
+		this.router.get('/',(req,res) => res.json({ id:1, message:"Hello Broda"}));
+		this.router.use(testRouter.initRoute()); 
         
-        return this.router;
+		return this.router;
     }
 }
