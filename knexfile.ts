@@ -7,15 +7,15 @@ export type DB_ENV_TYPE = {
   development: Knex.Config, 
   staging?: Knex.Config 
 }
-
+//modifiquei para acessar localmente
 const knexConfig: {[key:string]: Knex.Config} = {
   development: {
     client: 'pg',
     connection: {
-      host:process.env.DB_HOST,
+      host: process.env.DB_HOST,
       database:process.env.DATABASE,
       user: process.env.DB_USER,
-      password: process.env.DB_PASSWD
+      password: process.env.DB_PASSWORD
     },
     migrations: {
       tableName:'knex_migrations',

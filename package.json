@@ -1,5 +1,5 @@
 {
-  "name": "Back-End-Site-Clube-de-Programacao",
+  "name": "backend-site-clube-de-programacao",
   "version": "1.0.0",
   "description": "Backend do Site do Clube de Programação do Senai Cimatec",
   "main": "src/server.ts",
