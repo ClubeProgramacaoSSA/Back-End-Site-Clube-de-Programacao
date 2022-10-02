@@ -15,7 +15,7 @@ const knexConfig: {[key:string]: Knex.Config} = {
       host: process.env.DB_HOST,
       database:process.env.DATABASE,
       user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD
+      password: process.env.DB_PASSWD
     },
     migrations: {
       tableName:'knex_migrations',
