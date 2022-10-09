@@ -7,14 +7,35 @@ class MemberRoutes implements Route {
     tableName: string;
 
 	constructor(){
-		this.tableName = 'TB_MEMBRO';
+		this.tableName = 'tb_membro';
 	}
 	
 	public initRoute() {
-		this.router.get('/membro',(req,res) => {
+
+		this.router.get('/member',(req,res) => { //Get all members
 			
 			connection(this.tableName)
 				.select('*')
+				.then( testJson => res.status(200).json(testJson) )
+				.catch( err => res.status(500).json({ errMessage: err.message}));
+		});
+
+		this.router.get('/member/:id_member', (req,res) => { //Get a especific member
+			const id_memberParam = req.params.id_member;
+
+			connection(this.tableName)
+				.select('*')
+				.where('id_membro', id_memberParam)
+				.then( testJson => res.status(200).json(testJson) )
+				.catch( err => res.status(500).json({ errMessage: err.message}));
+		});
+
+		this.router.delete('/member/delete/:id_member', (req,res) => { //Delete a especific member
+			const id_memberParam = req.params.id_member;
+
+			connection(this.tableName)
+				.where('id_member', id_memberParam)
+				.del()
 				.then( testJson => res.status(200).json(testJson) )
 				.catch( err => res.status(500).json({ errMessage: err.message}));
 		});
