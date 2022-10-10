@@ -6,3 +6,9 @@ foo(); // Replys whats config db is using
 const app = App.getInstance();
 
 app.start();
+
+
+
+
+
+
