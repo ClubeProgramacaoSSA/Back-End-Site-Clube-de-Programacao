@@ -7,7 +7,7 @@ class TestRoutes implements Route {
 	tableName: string;
 
 	constructor(){
-		this.tableName = 'tb_test';
+		this.tableName = 'tb_membro';
 	}
 	
 	public initRoute() {
