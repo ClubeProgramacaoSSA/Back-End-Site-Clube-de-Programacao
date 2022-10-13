@@ -7,8 +7,3 @@ const app = App.getInstance();
 
 app.start();
 
-
-
-
-
-
