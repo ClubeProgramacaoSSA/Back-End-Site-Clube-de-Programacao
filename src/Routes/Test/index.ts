@@ -11,7 +11,7 @@ class TestRoutes implements Route {
 	}
 	
 	public initRoute() {
-		this.router.get('/test',(req,res) => {
+		this.router.get('/',(req,res) => {
 			
 			connection(this.tableName)
 				.select('*')
