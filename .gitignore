@@ -4,3 +4,7 @@ yarn.lock
 *.log
 package-lock.json
 .env
+build
+.vscode/
+.vscode/*
+

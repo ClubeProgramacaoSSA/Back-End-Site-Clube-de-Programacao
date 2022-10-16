@@ -1,7 +1,7 @@
 import express,{ Application } from 'express';
 import { createServer,Server } from 'http';
 import { config } from 'dotenv';
-import { MainRouter } from '../Routes'
+import { MainRouter } from '../Routes';
 
 export class App {
     private static instance: App;

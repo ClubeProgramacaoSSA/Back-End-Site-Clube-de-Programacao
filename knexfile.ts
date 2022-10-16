@@ -60,4 +60,6 @@ const knexConfig: {[key:string]: Knex.Config} = {
 
 };
 
+//AMOR
+
 export default knexConfig;
