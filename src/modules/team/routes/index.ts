@@ -29,7 +29,7 @@ class TeamRoutes implements Route {
 				.catch( err => res.status(500).json({ errMessage: err.message}));
 		});
 
-		this.router.post('/team/insert',(req,res) => { //Insert a new team in dataBase
+		this.router.post('/team',(req,res) => { //Insert a new team in dataBase
 			connection(this.tableName)
 				.insert(				
 					{
@@ -43,7 +43,17 @@ class TeamRoutes implements Route {
 				.then( testJson => res.status(200).json(testJson) )
 				.catch( err => res.status(500).json({ errMessage: err.message}));
 		});
-
+		this.router.get('/team/:id_team/tournament/:id_tournament', (req, res) => {
+			const {id_team, id_tournament} = req.params;
+			connection(this.tableName)
+			.select('*')
+			.join('tb_equipe_torneio', 'tb_equipe_torneio.id_equipe', '=', 'tb_equipe.id_equipe')
+			.join('tb_torneio', 'tb_torneio.id_torneio', '=', 'tb_equipe_torneio.id_torneio')
+			.where('tb_equipe.id_equipe', id_team)
+			.where('tb_torneio.id_torneio', id_tournament)
+			.then( testJson => res.status(200).json(testJson) )
+			.catch( err => res.status(500).json({ errMessage: err.message}));
+		})
 		return this.router;
 	}
 }

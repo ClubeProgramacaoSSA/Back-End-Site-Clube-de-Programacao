@@ -29,23 +29,7 @@ class TournamentRoutes implements Route {
 				.catch( err => res.status(500).json({ errMessage: err.message}));
 		});
 
-		this.router.get('/tournament/team',(req,res) => { //NOT COMPLETE
-			const objTeamInTournament = {
-				id_team: req.body.id_time,
-				id_tournament: req.body.id_torneio        
-			}
-			
-			connection('tb_equipe')
-				.select('*')
-				.innerJoin('tb_equipe_torneio', function() {
-					this
-					.on('tb_equipe.id_equipe', '=', 'tb_equipe_torneio.id_equipe')})
-				.where('id_equipe', objTeamInTournament.id_team)
-				//.andWhere('id_torneio', objTeamInTournament.id_tournament)
-				
-				.then( testJson => res.status(200).json(testJson))
-				.catch( err => res.status(500).json({ errMessage: err.message}));
-		});
+		
 
 		return this.router;
 	}
