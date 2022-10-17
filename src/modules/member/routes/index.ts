@@ -13,7 +13,6 @@ class MemberRoutes implements Route {
 	public initRoute() {
 
 		this.router.get('/member',	(req,res) => { //Get all members
-			const mano:string = 'a'	
 			const {oficio} = req.query;
 				if(oficio){
 					connection(this.tableName)
