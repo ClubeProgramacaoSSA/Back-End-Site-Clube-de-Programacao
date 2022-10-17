@@ -29,7 +29,7 @@ class TournamentRoutes implements Route {
 				.catch( err => res.status(500).json({ errMessage: err.message}));
 		});
 
-		this.router.get('/team',(req,res) => { //NOT COMPLETE
+		this.router.get('/team',(req,res) => { //Get a team in a tournament //NOT COMPLETE
 			const objTeamInTournament = {
 				id_team: req.body.id_time,
 				id_tournament: req.body.id_torneio        
