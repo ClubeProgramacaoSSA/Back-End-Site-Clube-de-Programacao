@@ -12,7 +12,7 @@ class MemberRoutes implements Route {
 	
 	public initRoute() {
 
-		this.router.get('/member',(req,res) => { //Get all members
+		this.router.get('/',(req,res) => { //Get all members
 			
 			connection(this.tableName)
 				.select('*')
@@ -20,7 +20,7 @@ class MemberRoutes implements Route {
 				.catch( err => res.status(500).json({ errMessage: err.message}));
 		});
 
-		this.router.get('/member/:id_member', (req,res) => { //Get a especific member
+		this.router.get('/:id_member', (req,res) => { //Get a especific member
 			const id_memberParam = req.params.id_member;
 
 			connection(this.tableName)
@@ -30,13 +30,13 @@ class MemberRoutes implements Route {
 				.catch( err => res.status(500).json({ errMessage: err.message}));
 		});
 
-		this.router.delete('/member/delete/:id_member', (req,res) => { //Delete a especific member
+		this.router.delete('/delete/:id_member', (req,res) => { //Delete a especific member
 			const id_memberParam = req.params.id_member;
 
 			connection(this.tableName)
 				.where('id_member', id_memberParam)
 				.del()
-				.then( testJson => res.status(200).json(testJson) )
+				.then(testJson => res.status(200).json(testJson))
 				.catch( err => res.status(500).json({ errMessage: err.message}));
 		});
 

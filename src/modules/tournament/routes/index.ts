@@ -11,7 +11,7 @@ class TournamentRoutes implements Route {
 	}
 	
 	public initRoute() {
-		this.router.get('/tournament',(req,res) => {
+		this.router.get('/',(req,res) => {
 			
 			connection(this.tableName)
 				.select('*')
@@ -19,7 +19,7 @@ class TournamentRoutes implements Route {
 				.catch( err => res.status(500).json({ errMessage: err.message}));
 		});
 
-		this.router.get('/tournament/team/:id_team',(req,res) => { //NOT COMPLETE
+		this.router.get('/team/:id_team',(req,res) => { //NOT COMPLETE
 			const id_team = req.params.id_team
 			
 			connection(this.tableName)
@@ -29,7 +29,7 @@ class TournamentRoutes implements Route {
 				.catch( err => res.status(500).json({ errMessage: err.message}));
 		});
 
-		this.router.get('/tournament/team',(req,res) => { //NOT COMPLETE
+		this.router.get('/team',(req,res) => { //NOT COMPLETE
 			const objTeamInTournament = {
 				id_team: req.body.id_time,
 				id_tournament: req.body.id_torneio        

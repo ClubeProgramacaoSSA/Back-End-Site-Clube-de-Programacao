@@ -5,10 +5,10 @@
             "server": "localhost",
             "port": 5432,
             "driver": "PostgreSQL",
-            "name": "user",
+            "name": "Teste",
             "database": "postgres",
-            "username": "user",
-            "password": "password123",
+            "username": "postgres",
+            "password": "docker",
             "group": "password123"
         }
     ]
