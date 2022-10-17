@@ -1,10 +1,10 @@
 import { Router, IRouter,Application } from 'express';
 import { Route } from '../Models';
 import { testRouter } from '../Routes/Test';
-
 import { teamRouter } from '../modules/team/routes/index';
 import { tournamentRouter } from '../modules/tournament/routes/index';
 import { memberRouter } from '../modules/member/routes/index';
+import { projectRouter } from '../modules/projects';
 
 export class MainRouter implements Route {
     router = Router();
@@ -23,12 +23,11 @@ export class MainRouter implements Route {
     // add the other routes right here!
     public initRoute() {
 		this.router.get('/',(req,res) => res.json({ id:1, message:"Hello Broda"}));
-		this.router.use(testRouter.initRoute());
-        
-        this.router.use(teamRouter.initRoute());
-        this.router.use(tournamentRouter.initRoute());
-        this.router.use(memberRouter.initRoute());   
-        this.router.use(projectsRouter.initRoute());
+		this.router.use("/test", testRouter.initRoute());
+        this.router.use("/team", teamRouter.initRoute());
+        this.router.use("/tournament", tournamentRouter.initRoute());
+        this.router.use("/member", memberRouter.initRoute());   
+        this.router.use("/projects", projectRouter.initRoute());
 		return this.router;
     }
 }
