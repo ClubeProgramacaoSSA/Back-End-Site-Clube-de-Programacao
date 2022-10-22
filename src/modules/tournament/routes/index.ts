@@ -1,35 +1,20 @@
 import { Router } from 'express';
 import { Route } from '../../../Models';
-import { connection } from '../../../Db/knex';
+import { TournamentService } from '../../tournament/services';
 
 class TournamentRoutes implements Route {
 	router = Router();
-    tableName: string;
+	service: TournamentService;
 
 	constructor(){
-		this.tableName = 'tb_torneio';
+		this.service = new TournamentService();
 	}
 	
 	public initRoute() {
-		this.router.get('/tournament',(req,res) => {
-			
-			connection(this.tableName)
-				.select('*')
-				.then( testJson => res.status(200).json(testJson) )
-				.catch( err => res.status(500).json({ errMessage: err.message}));
-		});
-
-		this.router.get('/tournament/team/:id_team',(req,res) => { //NOT COMPLETE
-			const id_team = req.params.id_team
-			
-			connection(this.tableName)
-				.select('*')
-				.where('id_equipe', id_team)
-				.then( testJson => res.status(200).json(testJson) )
-				.catch( err => res.status(500).json({ errMessage: err.message}));
-		});
-
 		
+		this.router.get('/', this.service.getAllTournament); //Get all tournament
+		this.router.get('/especficTeam', this.service.getEspecificTeamInTournament); 
+		//Get a team in a tournament //NOT COMPLETE
 
 		return this.router;
 	}

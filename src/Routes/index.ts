@@ -22,11 +22,12 @@ export class MainRouter implements Route {
     // add the other routes right here!
     public initRoute() {
 		this.router.get('/',(req,res) => res.json({ id:1, message:"Hello Broda"}));
-		this.router.use('/test',testRouter.initRoute() ); 
-        
-        this.router.use(teamRouter.initRoute());
-        this.router.use(tournamentRouter.initRoute());
-        this.router.use(memberRouter.initRoute());   
+		this.router.use(testRouter.initRoute());
+
+        this.router.use('/member', memberRouter.initRoute());  
+        this.router.use('/team', teamRouter.initRoute());
+        this.router.use('/tournament', tournamentRouter.initRoute());
+         
         
 		return this.router;
     }
