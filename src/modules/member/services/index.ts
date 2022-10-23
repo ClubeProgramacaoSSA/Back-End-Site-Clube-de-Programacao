@@ -4,31 +4,33 @@ import { connection } from '../../../Db/knex';
 // import bcrypt from 'bcrypt' ;
 // import jwt from 'jsonwebtoken' ;
 
-export class MemberService{
-    private tableName: string;
+export class MemberService {
+    private tableName:string;
 
-	public constructor(){
+	constructor(){
 		this.tableName = 'tb_membro';
 	}
 
-	getAllMembers(req: Request, res: Response) { //Get all members
-		connection('tb_membro'/*this.tableName*/)
-			.select('*')
-			.then( testJson => res.status(200).json(testJson) )
-			.catch( err => res.status(500).json({ errMessage: err.message}));
+	public getAllMembers() { //Get all members
+		return new Promise((resolve,reject) => {
+			connection( this.tableName )
+				.select('*')
+				.then( testJson => resolve( testJson ) )
+				.catch( err => reject({ errMessage: err.message }) );
+		})
 	};
 
-	getEspecificMember(req: Request, res: Response){ //Get a especific member
-		const id_memberParam = req.params.id_member;
-
-		connection('tb_membro')
-			.select('*')
-			.where('id_membro', id_memberParam)
-			.then( testJson => res.status(200).json(testJson) )
-			.catch( err => res.status(500).json({ errMessage: err.message}));
+	public async getEspecificMember( idMember: number ){ //Get a especific member
+		return new Promise((resolve,reject) => {
+			connection( this.tableName )
+				.select('*')
+				.where('id_membro', idMember)
+				.then( testJson => resolve(testJson) )
+				.catch( err => reject({ errMessage: err.message}));
+			})
 	};
 
-	deleteEspecificMember(req: Request, res: Response){ //Delete a especific member
+	public deleteEspecificMember(req: Request, res: Response){ //Delete a especific member
 		const id_memberParam = req.params.id_member;
 		connection(this.tableName)
 			.where('id_member', id_memberParam)
@@ -86,4 +88,5 @@ export class MemberService{
 		// };
 
 }
+
 
