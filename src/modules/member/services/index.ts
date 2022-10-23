@@ -5,17 +5,28 @@ import { connection } from '../../../Db/knex';
 // import jwt from 'jsonwebtoken' ;
 
 export class MemberService{
-    private tableName: string;
+    tableName: string;
 
-	public constructor(){
+	constructor(){
 		this.tableName = 'tb_membro';
 	}
 
 	getAllMembers(req: Request, res: Response) { //Get all members
-		connection('tb_membro'/*this.tableName*/)
-			.select('*')
-			.then( testJson => res.status(200).json(testJson) )
-			.catch( err => res.status(500).json({ errMessage: err.message}));
+		const {oficio} = req.query;
+		if(oficio){
+			connection(this.tableName)
+				.select('*')
+				.join('tb_imagem', 'tb_imagem.id_imagem', '=', 'tb_membro.id_foto_membro')
+				.where('oficio', oficio)
+				.then( testJson => res.status(200).json(testJson) )
+				.catch( err => res.status(500).json({ errMessage: err.message}));
+		}else{
+			connection(this.tableName)
+				.select('*')
+				.then( testJson => res.status(200).json(testJson) )
+				.catch( err => res.status(500).json({ errMessage: err.message}));
+
+		}
 	};
 
 	getEspecificMember(req: Request, res: Response){ //Get a especific member
