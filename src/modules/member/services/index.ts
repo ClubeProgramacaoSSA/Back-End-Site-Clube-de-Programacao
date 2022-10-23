@@ -5,7 +5,7 @@ import { connection } from '../../../Db/knex';
 // import jwt from 'jsonwebtoken' ;
 
 export class MemberService{
-    tableName: string;
+    private tableName: string;
 
 	constructor(){
 		this.tableName = 'tb_membro';
