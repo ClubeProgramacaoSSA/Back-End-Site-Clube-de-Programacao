@@ -1,4 +1,3 @@
-import { Request, Response, Router } from 'express';
 import { connection } from '../../../Db/knex';
 
 // import bcrypt from 'bcrypt' ;
@@ -20,7 +19,7 @@ export class MemberService {
 		})
 	};
 
-	public async getEspecificMember( idMember: number ){ //Get a especific member
+	public getEspecificMember( idMember: number ){ //Get a especific member
 		return new Promise((resolve,reject) => {
 			connection( this.tableName )
 				.select('*')
@@ -30,13 +29,16 @@ export class MemberService {
 			})
 	};
 
-	public deleteEspecificMember(req: Request, res: Response){ //Delete a especific member
-		const id_memberParam = req.params.id_member;
-		connection(this.tableName)
-			.where('id_member', id_memberParam)
-			.del()
-			.then(testJson => res.status(200).json(testJson))
-			.catch( err => res.status(500).json({ errMessage: err.message}));
+	public deleteEspecificMember(idMember: number){ //Delete a especific member
+
+		return new Promise((resolve,reject) => {
+				connection(this.tableName)
+				.where('id_member', idMember)
+				.del()
+				.then(testJson => resolve(testJson))
+				.catch( err => reject({ errMessage: err.message}));
+			})
+		
 	};
 
 	// post('/', (req,res) => { //Member Login HELPPPPPPPPP
