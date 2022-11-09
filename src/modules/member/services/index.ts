@@ -7,7 +7,7 @@ export class MemberService {
     private tableName:string;
 
 	constructor(){
-		this.tableName = 'tb_membro';
+		this.tableName = 'tb_member';
 	}
 
 	public getAllMembers() { //Get all members
@@ -23,7 +23,7 @@ export class MemberService {
 		return new Promise((resolve,reject) => {
 			connection( this.tableName )
 				.select('*')
-				.where('id_membro', idMember)
+				.where('id_member', idMember)
 				.then( testJson => resolve(testJson) )
 				.catch( err => reject({ errMessage: err.message}));
 			})

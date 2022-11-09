@@ -4,7 +4,7 @@ export class TeamService{
     private tableName: string;
 
 	constructor(){
-		this.tableName = 'tb_equipe';
+		this.tableName = 'tb_team';
 	}
 	
     public getAllTeams() { //Get all teams
@@ -21,7 +21,7 @@ export class TeamService{
         return new Promise((resolve,reject) => {
             connection(this.tableName)
                 .select('*')
-                .where('id_equipe', id_team)
+                .where('id_team', id_team)
                 .then( testJson => resolve( testJson ) )
                 .catch( err => reject({ errMessage: err.message }) );
         }) 
@@ -33,9 +33,9 @@ export class TeamService{
             connection(this.tableName)
             .insert(				
                 { 
-                    nome: team.nome,
-                    capitao: team.capitao,
-                    dt_criacao: team.dt_criacao
+                    name: team.name,
+                    captain: team.captain,
+                    dt_criation: team.dt_criation
                 }				
             )
             .into(this.tableName)
