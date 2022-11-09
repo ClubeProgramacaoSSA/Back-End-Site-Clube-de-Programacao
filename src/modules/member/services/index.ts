@@ -1,51 +1,44 @@
-import { Request, Response, Router } from 'express';
 import { connection } from '../../../Db/knex';
 
 // import bcrypt from 'bcrypt' ;
 // import jwt from 'jsonwebtoken' ;
 
-export class MemberService{
-    private tableName: string;
+export class MemberService {
+    private tableName:string;
 
 	constructor(){
-		this.tableName = 'tb_membro';
+		this.tableName = 'tb_member';
 	}
 
-	getAllMembers(req: Request, res: Response) { //Get all members
-		const {oficio} = req.query;
-		if(oficio){
-			connection(this.tableName)
+	public getAllMembers() { //Get all members
+		return new Promise((resolve,reject) => {
+			connection( this.tableName )
 				.select('*')
-				.join('tb_imagem', 'tb_imagem.id_imagem', '=', 'tb_membro.id_foto_membro')
-				.where('oficio', oficio)
-				.then( testJson => res.status(200).json(testJson) )
-				.catch( err => res.status(500).json({ errMessage: err.message}));
-		}else{
-			connection(this.tableName)
-				.select('*')
-				.then( testJson => res.status(200).json(testJson) )
-				.catch( err => res.status(500).json({ errMessage: err.message}));
-
-		}
+				.then( testJson => resolve( testJson ) )
+				.catch( err => reject({ errMessage: err.message }) );
+		})
 	};
 
-	getEspecificMember(req: Request, res: Response){ //Get a especific member
-		const id_memberParam = req.params.id_member;
-
-		connection('tb_membro')
-			.select('*')
-			.where('id_membro', id_memberParam)
-			.then( testJson => res.status(200).json(testJson) )
-			.catch( err => res.status(500).json({ errMessage: err.message}));
+	public getEspecificMember( idMember: number ){ //Get a especific member
+		return new Promise((resolve,reject) => {
+			connection( this.tableName )
+				.select('*')
+				.where('id_member', idMember)
+				.then( testJson => resolve(testJson) )
+				.catch( err => reject({ errMessage: err.message}));
+			})
 	};
 
-	deleteEspecificMember(req: Request, res: Response){ //Delete a especific member
-		const id_memberParam = req.params.id_member;
-		connection(this.tableName)
-			.where('id_member', id_memberParam)
-			.del()
-			.then(testJson => res.status(200).json(testJson))
-			.catch( err => res.status(500).json({ errMessage: err.message}));
+	public deleteEspecificMember(idMember: number){ //Delete a especific member
+
+		return new Promise((resolve,reject) => {
+				connection(this.tableName)
+				.where('id_member', idMember)
+				.del()
+				.then(testJson => resolve(testJson))
+				.catch( err => reject({ errMessage: err.message}));
+			})
+		
 	};
 
 	// post('/', (req,res) => { //Member Login HELPPPPPPPPP
@@ -97,4 +90,5 @@ export class MemberService{
 		// };
 
 }
+
 
