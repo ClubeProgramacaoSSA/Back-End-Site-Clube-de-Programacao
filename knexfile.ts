@@ -55,23 +55,24 @@ const knexConfig: {[key:string]: Knex.Config} = {
     migrations: {
       tableName: "knex_migrations"
     }
-  },
+  }*/,
 
   production: {
-    client: "postgresql",
+    client: 'pg',
     connection: {
-      database: "my_db",
-      user: "username",
-      password: "password"
-    },
-    pool: {
-      min: 2,
-      max: 10
+      host:process.env.DB_HOST,
+      database:process.env.DATABASE,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWD
     },
     migrations: {
-      tableName: "knex_migrations"
+      tableName:'knex_migrations',
+      directory:join(__dirname,'src','Db','migrations'),
+    },
+    seeds: {
+      directory: join(__dirname,'src','Db','seeds'),
     }
-  }*/
+  }
 
 };
 

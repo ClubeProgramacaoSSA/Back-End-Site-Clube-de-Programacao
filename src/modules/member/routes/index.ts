@@ -1,46 +1,47 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { Route } from '../../../Models';
-import { connection } from '../../../Db/knex';
+import { MemberService } from '../services';
+
+// import bcrypt from 'bcrypt' ;
+// import jwt from 'jsonwebtoken' ;
 
 class MemberRoutes implements Route {
 	router = Router();
-    tableName: string;
+    service: MemberService;
 
 	constructor(){
-		this.tableName = 'tb_membro';
+		this.service = new MemberService();
 	}
 	
 	public initRoute() {
-
-		this.router.get('/member',(req,res) => { //Get all members
-			
-			connection(this.tableName)
-				.select('*')
-				.then( testJson => res.status(200).json(testJson) )
-				.catch( err => res.status(500).json({ errMessage: err.message}));
-		});
-
-		this.router.get('/member/:id_member', (req,res) => { //Get a especific member
-			const id_memberParam = req.params.id_member;
-
-			connection(this.tableName)
-				.select('*')
-				.where('id_membro', id_memberParam)
-				.then( testJson => res.status(200).json(testJson) )
-				.catch( err => res.status(500).json({ errMessage: err.message}));
-		});
-
-		this.router.delete('/member/delete/:id_member', (req,res) => { //Delete a especific member
-			const id_memberParam = req.params.id_member;
-
-			connection(this.tableName)
-				.where('id_member', id_memberParam)
-				.del()
-				.then( testJson => res.status(200).json(testJson) )
-				.catch( err => res.status(500).json({ errMessage: err.message}));
-		});
+		this.router.get('/', this.getAllMembers );
+		this.router.get('/:id_member', this.getEspecificMember);
+		this.router.delete('/delete/:id_member', this.deleteEspecificMember);
+		//this.router.post('/', this.service.memberLogin);
 
 		return this.router;
+	}
+
+	private getAllMembers = (req: Request,res:Response) => {
+		this.service.getAllMembers()
+			.then( (testJson => res.status(200).json(testJson)) )
+			.catch((errObj) => res.status(500).json(errObj))
+	}
+	
+	private getEspecificMember = (req: Request,res:Response) => {
+		const { id_member } = req.params;
+
+		this.service.getEspecificMember( parseInt(id_member) )
+			.then(json => res.status(200).json( json ))
+			.catch( errObj => res.status(500).json( errObj )  )
+	}
+
+	private deleteEspecificMember = (req: Request,res:Response) => {
+		const { id_member } = req.params;
+
+		this.service.deleteEspecificMember( parseInt(id_member) )
+			.then(json => res.status(200).json( json ))
+			.catch( errObj => res.status(500).json( errObj )  )
 	}
 }
 
