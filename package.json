@@ -6,8 +6,8 @@
   "author": "Pedro Facundes",
   "license": "MIT",
   "scripts": {
-    "start":"ts-node --transpile-only src/server.ts",
-	"start:prod":"tsc && node build/src/server.js",
+    "start": "ts-node --transpile-only src/server.ts",
+    "start:prod": "tsc && node build/src/server.js",
     "dev": "ts-node src/server.ts"
   },
   "devDependencies": {
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "dotenv": "^16.0.2",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "knex": "^2.3.0",
     "pg": "^8.8.0",
     "typescript": "^4.8.4"
