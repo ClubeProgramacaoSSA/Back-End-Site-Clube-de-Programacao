@@ -2,9 +2,6 @@ import { Request, Response, Router } from 'express';
 import { Route } from '../../../Models';
 import { ProjectService } from '../services';
 
-// import bcrypt from 'bcrypt' ;
-// import jwt from 'jsonwebtoken' ;
-
 class ProjectRoutes implements Route {
 	router = Router();
     service: ProjectService;
