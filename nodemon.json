@@ -1,9 +1,0 @@
-{
-    "env": {
-        "POSTGRE_USER": "user",
-        "POSTGRE_PASSWORD": "password123",
-        "POSTGRE_DATABASE": "xzczxv",
-        "POSTGRE_HOST": "127.0.0.1",
-        "POSTGRE_PORT": 5432
-    }
-}

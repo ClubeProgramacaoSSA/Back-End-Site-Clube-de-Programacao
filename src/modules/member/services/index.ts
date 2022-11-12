@@ -5,9 +5,10 @@ import { connection } from '../../../Db/knex';
 
 export class MemberService {
     private tableName:string;
-
+	private tableImageName: string;
 	constructor(){
 		this.tableName = 'tb_member';
+		this.tableImageName = 'tb_image';
 	}
 
 	public getAllMembers(oficio: string | undefined) { //Get all members
@@ -16,6 +17,7 @@ export class MemberService {
 				connection( this.tableName )
 				.select('*')
 				.where('oficio', oficio)
+				.join(this.tableImageName, 'tb_image.id_image', '=', 'tb_member.id_member_photo')
 				.then( testJson => resolve( testJson ) )
 				.catch( err => reject({ errMessage: err.message }) );
 			}else{
