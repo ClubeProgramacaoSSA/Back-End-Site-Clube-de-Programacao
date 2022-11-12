@@ -4,7 +4,7 @@ export class ProjectService {
     private tableName:string;
 
 	constructor(){
-		this.tableName = 'tb_project';
+		this.tableName = 'tb_projeto';
 	}
 
     public getAllProjects() { //Get all members
@@ -48,12 +48,13 @@ export class ProjectService {
 				{ 	
 					lider: project.lider,
 					id_imagem: project.id_imagem, 
-					id_tipo: project.id_tipo,
+					id_tipo_projeto: project.id_tipo,
 					descricao: project.descricao,
-					dt_inicio: project.dt_inicio,
-					dt_finalizacao_prevista: project.dt_finalizacao_prevista,
+					DT_inicio: project.dt_inicio,
+					DT_finalizacao_prevista: project.dt_finalizacao_prevista,
 					nome: project.body.nome,
-					url_github:project.body.url_github
+					ponto_jpq_maximo: project.ponto_jpq_maximo,
+					URL_github:project.body.url_github
 				}				
 			)
 			.into(this.tableName)
@@ -69,12 +70,13 @@ export class ProjectService {
 				.update({
 					lider: project.lider,
 					id_imagem: project.id_imagem, 
-					id_tipo: project.id_tipo,
+					id_tipo_projeto: project.id_tipo,
 					descricao: project.descricao,
-					dt_inicio: project.dt_inicio,
-					dt_finalizacao_prevista: project.dt_finalizacao_prevista,
-					nome: project.nome,
-					url_github:project.url_github
+					DT_inicio: project.dt_inicio,
+					DT_finalizacao_prevista: project.dt_finalizacao_prevista,
+					nome: project.body.nome,
+					ponto_jpq_maximo: project.ponto_jpq_maximo,
+					URL_github:project.body.url_github
 				})	
 				.where('id_project', project.id_project)		
 			})
