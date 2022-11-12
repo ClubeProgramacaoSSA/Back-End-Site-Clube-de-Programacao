@@ -4,7 +4,7 @@ export class TeamService{
     private tableName: string;
 
 	constructor(){
-		this.tableName = 'tb_team';
+		this.tableName = 'tb_equipe';
 	}
 	
     public getAllTeams() { //Get all teams
@@ -33,9 +33,9 @@ export class TeamService{
             connection(this.tableName)
             .insert(				
                 { 
-                    name: team.name,
-                    captain: team.captain,
-                    dt_criation: team.dt_criation
+                    nome: team.nome,
+                    id_captain: team.id_capitao,
+                    DT_criacao: team.DT_criacao
                 }				
             )
             .into(this.tableName)

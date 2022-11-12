@@ -4,12 +4,12 @@ export class TournamentService{
     tableName: string;
 
 	constructor(){
-		this.tableName = 'tb_tournament';
+		this.tableName = 'tb_torneio';
 	}
 
     getAllTournament(){
         return new Promise((resolve,reject) => {
-            connection('tb_tournament')
+            connection(this.tableName)
             .select('*')
             .then( testJson => resolve( testJson ) )
             .catch( err => reject({ errMessage: err.message }) );
@@ -20,7 +20,7 @@ export class TournamentService{
     getEspecificTeamInTournament(objTeamInTournament: any){ //Get a team in a tournament //NOT COMPLETE
 
         return new Promise((resolve,reject) => {
-            connection('tb_tournament')
+            connection(this.tableName)
             .select('*')
             .join('tb_team_tournament', 'tb_team.id_team', '=', 'tb_team_tournament.id_team')
             .where('id_team', objTeamInTournament.id_team)

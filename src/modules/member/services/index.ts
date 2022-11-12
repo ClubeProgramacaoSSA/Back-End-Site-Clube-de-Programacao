@@ -7,13 +7,15 @@ export class MemberService {
     private tableName:string;
 
 	constructor(){
-		this.tableName = 'tb_member';
+		this.tableName = 'tb_membro';
 	}
 
 	public getAllMembers() { //Get all members
 		return new Promise((resolve,reject) => {
 			connection( this.tableName )
+			//.join('tb_curso_instituicao', 'tb_curso.id_curso', '=', 'tb_curso_instituicao.id_curso')
 				.select('*')
+			//.join('tb_instituicao_ensino', 'tb_curso_instituicao', 'tb_instituicao_ensino.id_instituicao_ensino', '=', 'tb_curso_instituicao.id_instituicao')
 				.then( testJson => resolve( testJson ) )
 				.catch( err => reject({ errMessage: err.message }) );
 		})
@@ -23,7 +25,7 @@ export class MemberService {
 		return new Promise((resolve,reject) => {
 			connection( this.tableName )
 				.select('*')
-				.where('id_member', idMember)
+				.where('id_membro', idMember)
 				.then( testJson => resolve(testJson) )
 				.catch( err => reject({ errMessage: err.message}));
 			})
@@ -33,7 +35,7 @@ export class MemberService {
 
 		return new Promise((resolve,reject) => {
 				connection(this.tableName)
-				.where('id_member', idMember)
+				.where('id_membro', idMember)
 				.del()
 				.then(testJson => resolve(testJson))
 				.catch( err => reject({ errMessage: err.message}));
