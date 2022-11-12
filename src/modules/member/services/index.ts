@@ -10,12 +10,21 @@ export class MemberService {
 		this.tableName = 'tb_member';
 	}
 
-	public getAllMembers() { //Get all members
+	public getAllMembers(oficio: string | undefined) { //Get all members
 		return new Promise((resolve,reject) => {
-			connection( this.tableName )
+			if(oficio){
+				connection( this.tableName )
+				.select('*')
+				.where('oficio', oficio)
+				.then( testJson => resolve( testJson ) )
+				.catch( err => reject({ errMessage: err.message }) );
+			}else{
+				connection( this.tableName )
 				.select('*')
 				.then( testJson => resolve( testJson ) )
 				.catch( err => reject({ errMessage: err.message }) );
+			}
+			
 		})
 	};
 

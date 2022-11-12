@@ -1,10 +1,13 @@
 import { Request, Response, Router } from 'express';
+import { parse } from 'querystring';
 import { Route } from '../../../Models';
 import { MemberService } from '../services';
 
 // import bcrypt from 'bcrypt' ;
 // import jwt from 'jsonwebtoken' ;
-
+interface Query{
+	oficio:string | undefined
+}
 class MemberRoutes implements Route {
 	router = Router();
     service: MemberService;
@@ -18,13 +21,13 @@ class MemberRoutes implements Route {
 		this.router.get('/:id_member', this.getEspecificMember);
 		this.router.delete('/delete/:id_member', this.deleteEspecificMember);
 		//this.router.post('/', this.service.memberLogin);
-
 		return this.router;
 	}
 
-	private getAllMembers = (req: Request,res:Response) => {
-		this.service.getAllMembers()
-			.then( (testJson => res.status(200).json(testJson)) )
+	private getAllMembers = (req: Request<{}, {}, {}, Query>,res:Response) => {
+		const {oficio} = req.query
+		this.service.getAllMembers(oficio)
+			.then( (testJson => res.status(200).json(testJson)))
 			.catch((errObj) => res.status(500).json(errObj))
 	}
 	
