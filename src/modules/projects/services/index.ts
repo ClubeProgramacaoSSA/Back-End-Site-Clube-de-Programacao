@@ -8,7 +8,7 @@ export class ProjectService {
 		this.tableName = 'tb_projeto';
 	}
 
-    public getAllProjects() { //Get all members
+    public getAll() { //Get all members
 		return new Promise((resolve,reject) => {
 			connection(this.tableName)
 
@@ -19,7 +19,7 @@ export class ProjectService {
             .join('tb_imagem_projeto', 'tb_projeto.id_projeto', '=', 'tb_imagem_projeto.id_projeto')
             .join('tb_imagem', 'tb_imagem_projeto.id_imagem', '=', 'tb_imagem.id_imagem')
             
-			// Join with tb_assunto_projeto 
+			// Join with tb_assunto_projeto
             .join('tb_assunto_projeto', 'tb_projeto.id_projeto', '=', 'tb_assunto_projeto.id_projeto')
             .join('tb_assunto', 'tb_assunto_projeto.id_assunto', '=', 'tb_assunto.id_assunto')   
 			
@@ -33,7 +33,7 @@ export class ProjectService {
 		})
 	};
 
-	public getEspecificProject( idProject: number ){ //Get a especific project
+	public getEspecific( idProject: number ){ //Get a especific project
 		return new Promise((resolve,reject) => {
 			connection(this.tableName)
 
@@ -59,7 +59,7 @@ export class ProjectService {
 		})
 	};
 
-	public postEspecificProject(project: any){ //Delete a especific project
+	public postEspecific(project: any){ //Delete a especific project
 		return new Promise((resolve,reject) => {
 			connection(this.tableName)
 			.insert(				
@@ -84,7 +84,7 @@ export class ProjectService {
 		
 	};
 
-	public updateEspecificProject(project: any){ //Delete a especific member
+	public updateEspecific(project: any){ //Delete a especific member
 
 		return new Promise((resolve,reject) => {
 			connection(this.tableName)
@@ -107,7 +107,7 @@ export class ProjectService {
 		})	
 	};
     
-    public getProjectPerType(projectType: String){ //Get project per type
+    public getPerType(projectType: String){ //Get project per type
 		projectType = projectType.toUpperCase()
 		
         return new Promise((resolve,reject) => {
@@ -137,7 +137,7 @@ export class ProjectService {
 		})
 	};
 
-	public deleteEspecificProject(idProject: number){ //Delete a especific member
+	public deleteEspecific(idProject: number){ //Delete a especific member
 		return new Promise((resolve,reject) => {
 			connection(this.tableName)
 			.where('id_projeto', idProject)

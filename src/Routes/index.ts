@@ -27,6 +27,7 @@ export class MainRouter implements Route {
 		this.router.get('/',(req,res) => res.json({ id:1, message:"Hello Broda"}));
 		this.router.use("/test", testRouter.initRoute());  
         this.router.use("/projects", projectRouter.initRoute());
+        
 		return this.router;
     }
 }
