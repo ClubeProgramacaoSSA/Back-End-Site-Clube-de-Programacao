@@ -1,20 +1,26 @@
-import { Router } from 'express';
+import { Router, IRouter, Request, Response } from 'express';
 import { Route } from '../../../Models';
+import { TestService } from '../service'
 import { connection } from '../../../Db/knex';
-import { TestService } from '../services';
 
 class TestRoutes implements Route {
-	router = Router();
-	service: TestService;
-
+	router: IRouter;
+	testService: TestService;
+	
 	constructor(){
-		this.service = new TestService();
+		this.router = Router();
+		this.testService = new TestService();
 	}
 	
 	public initRoute() {
-		this.router.get('/', this.service.getTest);
+		this.router.get('/', this.getTest );
 
-		return this.router;	
+		return this.router;
+	}
+	private getTest(req:Request,res: Response){
+		this.testService.get()
+			.then(data => res.status(200).json( data ))
+			.catch(err => res.status(500).json({errMessage: err.message,...err}));
 	}
 }
 
