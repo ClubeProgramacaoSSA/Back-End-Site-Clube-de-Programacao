@@ -10,34 +10,51 @@ export class ProjectService {
     public getAllProjects() { //Get all members
 		return new Promise((resolve,reject) => {
 			connection(this.tableName)
-            // Join with tb_equipe_projeto
-            .join('TB_tipo_projeto', 'TB_projeto.ID_tipo_projeto', '=', 'TB_tipo_projeto.ID_tipo_projeto')    
+
+            // Join with tb_tipo_projeto
+            .join('tb_tipo_projeto', 'tb_projeto.id_tipo_projeto', '=', 'tb_tipo_projeto.id_tipo_projeto')    
             
             // Join with TB_imagem_projeto
-            .join('TB_imagem_projeto', 'TB_projeto.ID_projeto', '=', 'TB_imagem_projeto.ID_projeto')
-            .join('TB_imagem', 'TB_imagem_projeto.ID_imagem', '=', 'TB_imagem.ID_imagem')
-            // Join with TB_assunto_projeto 
-            .join('TB_assunto_projeto', 'TB_projeto.ID_projeto', '=', 'TB_assunto_projeto.ID_projeto')
-            .join('TB_assunto', 'TB_assunto_projeto.ID_assunto', '=', 'TB_assunto.ID_assunto')            
-            .select('*')
+            .join('tb_imagem_projeto', 'tb_projeto.id_projeto', '=', 'tb_imagem_projeto.id_projeto')
+            .join('tb_imagem', 'tb_imagem_projeto.id_imagem', '=', 'tb_imagem.id_imagem')
+            
+			// Join with tb_assunto_projeto 
+            .join('tb_assunto_projeto', 'tb_projeto.id_projeto', '=', 'tb_assunto_projeto.id_projeto')
+            .join('tb_assunto', 'tb_assunto_projeto.id_assunto', '=', 'tb_assunto.id_assunto')   
+			
+			//Join with tb_lider
+			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')
+            
+			.select('*')
+
+			.then( testJson => resolve( testJson ) )
+			.catch( err => reject({ errMessage: err.message }) );
 		})
 	};
 
 	public getEspecificProject( idProject: number ){ //Get a especific project
 		return new Promise((resolve,reject) => {
 			connection(this.tableName)
-			// Join with tb_equipe_projeto
-            .join('TB_tipo_projeto', 'TB_projeto.ID_tipo_projeto', '=', 'TB_tipo_projeto.ID_tipo_projeto')    
+
+			// Join with tb_tipo_projeto
+			.join('tb_tipo_projeto', 'tb_projeto.id_tipo_projeto', '=', 'tb_tipo_projeto.id_tipo_projeto')    
+
+			// Join with TB_imagem_projeto
+			.join('tb_imagem_projeto', 'tb_projeto.id_projeto', '=', 'tb_imagem_projeto.id_projeto')
+			.join('tb_imagem', 'tb_imagem_projeto.id_imagem', '=', 'tb_imagem.id_imagem')
+			
+			// Join with tb_assunto_projeto 
+			.join('tb_assunto_projeto', 'tb_projeto.id_projeto', '=', 'tb_assunto_projeto.id_projeto')
+			.join('tb_assunto', 'tb_assunto_projeto.id_assunto', '=', 'tb_assunto.id_assunto')   
+			
+			//Join with tb_lider
+			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')           
             
-            // Join with TB_imagem_projeto
-            .join('TB_imagem_projeto', 'TB_projeto.ID_projeto', '=', 'TB_imagem_projeto.ID_projeto')
-            .join('TB_imagem', 'TB_imagem_projeto.ID_imagem', '=', 'TB_imagem.ID_imagem')
-            
-            // Join with TB_assunto_projeto 
-            .join('TB_assunto_projeto', 'TB_projeto.ID_projeto', '=', 'TB_assunto_projeto.ID_projeto')
-            .join('TB_assunto', 'TB_assunto_projeto.ID_assunto', '=', 'TB_assunto.ID_assunto')            
-            .select('*')
-			.where('id_project', idProject)
+			.select('*')
+			.where('tb_projeto.id_projeto', idProject)
+
+			.then( testJson => resolve( testJson ) )
+				.catch( err => reject({ errMessage: err.message }) );
 		})
 	};
 
@@ -46,7 +63,7 @@ export class ProjectService {
 			connection(this.tableName)
 			.insert(				
 				{ 	
-					lider: project.lider,
+					id_lider: project.lider,
 					id_imagem: project.id_imagem, 
 					id_tipo_projeto: project.id_tipo,
 					descricao: project.descricao,
@@ -59,6 +76,9 @@ export class ProjectService {
 			)
 			.into(this.tableName)
 
+			.then( testJson => resolve( testJson ) )
+			.catch( err => reject({ errMessage: err.message }) );
+
 		})
 		
 	};
@@ -66,40 +86,52 @@ export class ProjectService {
 	public updateEspecificProject(project: any){ //Delete a especific member
 
 		return new Promise((resolve,reject) => {
-				connection(this.tableName)
-				.update({
-					lider: project.lider,
-					id_imagem: project.id_imagem, 
-					id_tipo_projeto: project.id_tipo,
-					descricao: project.descricao,
-					DT_inicio: project.dt_inicio,
-					DT_finalizacao_prevista: project.dt_finalizacao_prevista,
-					nome: project.body.nome,
-					ponto_jpq_maximo: project.ponto_jpq_maximo,
-					URL_github:project.body.url_github
-				})	
-				.where('id_project', project.id_project)		
-			})
-		
+			connection(this.tableName)
+			.update({
+				lider: project.lider,
+				id_imagem: project.id_imagem, 
+				id_tipo_projeto: project.id_tipo,
+				descricao: project.descricao,
+				DT_inicio: project.dt_inicio,
+				DT_finalizacao_prevista: project.dt_finalizacao_prevista,
+				nome: project.body.nome,
+				ponto_jpq_maximo: project.ponto_jpq_maximo,
+				URL_github:project.body.url_github
+			})	
+
+			.where('id_project', project.id_project)
+			
+			.then( testJson => resolve( testJson ) )
+			.catch( err => reject({ errMessage: err.message }) );
+		})	
 	};
     
     public getProjectPerType(projectType: String){ //Get project per type
+		projectType = projectType.toUpperCase()
+		
         return new Promise((resolve,reject) => {
             connection(this.tableName)
-            // Join with tb_equipe_projetoimport { connection } from '../../../Db/knex';
 
-            .join('TB_tipo_projeto', 'TB_projeto.ID_tipo_projeto', '=', 'TB_tipo_projeto.ID_tipo_projeto')    
+            // Join with tb_tipo_projeto
+            .join('tb_tipo_projeto', 'tb_projeto.id_tipo_projeto', '=', 'tb_tipo_projeto.id_tipo_projeto')    
             
             // Join with TB_imagem_projeto
-            .join('TB_imagem_projeto', 'TB_projeto.ID_projeto', '=', 'TB_imagem_projeto.ID_projeto')
-            .join('TB_imagem', 'TB_imagem_projeto.ID_imagem', '=', 'TB_imagem.ID_imagem')
+            .join('tb_imagem_projeto', 'tb_projeto.id_projeto', '=', 'tb_imagem_projeto.id_projeto')
+            .join('tb_imagem', 'tb_imagem_projeto.id_imagem', '=', 'tb_imagem.id_imagem')
             
-            // Join with TB_assunto_projeto 
-            .join('TB_assunto_projeto', 'TB_projeto.ID_projeto', '=', 'TB_assunto_projeto.ID_projeto')
-            .join('TB_assunto', 'TB_assunto_projeto.ID_assunto', '=', 'TB_assunto.ID_assunto')            
-            .select('*')
+			// Join with tb_assunto_projeto 
+            .join('tb_assunto_projeto', 'tb_projeto.id_projeto', '=', 'tb_assunto_projeto.id_projeto')
+            .join('tb_assunto', 'tb_assunto_projeto.id_assunto', '=', 'tb_assunto.id_assunto')   
+			
+			//Join with tb_lider
+			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')
             
-            .whereRaw(`UPPER(tb_tipo_projeto.titulo) LIKE ?`, [`%${projectType}%`])
+			.select('*')
+            
+            .whereRaw(`UPPER(tb_tipo_projeto.tipo) LIKE ?`, `${projectType}`)
+
+			.then( testJson => resolve( testJson ) )
+			.catch( err => reject({ errMessage: err.message }) );
         
 		})
 	};
@@ -107,8 +139,11 @@ export class ProjectService {
 	public deleteEspecificProject(idProject: number){ //Delete a especific member
 		return new Promise((resolve,reject) => {
 			connection(this.tableName)
-			.where('id_project', idProject)
+			.where('id_projeto', idProject)
 			.del()
+
+			.then( testJson => resolve( testJson ) )
+			.catch( err => reject({ errMessage: err.message }) );
 		})
 	};
 }

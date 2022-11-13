@@ -12,12 +12,13 @@ class ProjectRoutes implements Route {
 	
 	public initRoute() {
 		this.router.get('/', this.getAllProjects);
+		this.router.get('/projectType', this.getProjectPerType);
 		this.router.get('/:id_project', this.getEspecificProject);
 		this.router.post('/postProject', this.postEspecificProject);
         this.router.put('/putProject', this.updateEspecificProject);
         this.router.delete('/delete/:id_project', this.deleteEspecificProject);
 
-        this.router.get('/:projectType', this.getProjectPerType);
+        
 	
 		return this.router;
 	}
@@ -60,7 +61,7 @@ class ProjectRoutes implements Route {
 	}
 
     private getProjectPerType = (req: Request,res:Response) => {
-        const { projectType } = req.params;
+        const  projectType  = req.body.projectType;
 
 		this.service.getProjectPerType(projectType)
 			.then( (testJson => res.status(200).json(testJson)) )
