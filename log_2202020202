@@ -1,0 +1,11 @@
+
+
+ id_membro | id_foto_membro | id_instituicao_ensino | id_curso_instituicao | id_funcao |        nome        | genero |         oficio          |         ra          | dt_nascimento | dt_ingresso_faculdade | dt_ingresso_clube 
+-----------+----------------+-----------------------+----------------------+-----------+--------------------+--------+-------------------------+---------------------+---------------+-----------------------+-------------------
+         1 |              1 |                     1 |                    1 |         1 | FERNANDO           | M      | ADM                     | 20A234              | 2001-02-01    | 2021-01-01            | 2022-01-01
+         2 |              1 |                     1 |                    1 |         1 | ADRIAN             | M      | ADM MARKETING           | 20A235              | 2001-05-22    | 2021-01-01            | 2022-01-01
+         3 |              1 |                     1 |                    1 |         1 | HORACIO            | M      | ADM                     | 20A236              | 2001-11-24    | 2021-01-01            | 2022-01-01
+         4 |              1 |                     1 |                    1 |         1 | ORLANDO            | M      | ADM                     | 20A237              | 2001-09-03    | 2021-01-01            | 2022-01-01
+         5 |              1 |                     1 |                    1 |         1 | LUIZ GUILHERME     | M      | ASSISTENTE DE MARKETING | 20A238              | 2001-02-01    | 2021-12-05            | 2022-01-01
+         6 |              1 |                     1 |                    1 |         1 | Sr. Facundes Pedro | M      | ESTAGIÁRIO SENIOR       | ValorComLimiteDe_20 | 2000-03-17    | 2018-02-02            | 2022-01-01
+(6 rows)
