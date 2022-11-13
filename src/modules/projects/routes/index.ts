@@ -18,8 +18,6 @@ class ProjectRoutes implements Route {
         this.router.put('/putProject', this.updateEspecificProject);
         this.router.delete('/delete/:id_project', this.deleteEspecificProject);
 
-        
-	
 		return this.router;
 	}
 
@@ -61,7 +59,9 @@ class ProjectRoutes implements Route {
 	}
 
     private getProjectPerType = (req: Request,res:Response) => {
-        const  projectType  = req.body.projectType;
+		console.log("TESTE")
+		console.log(req.body)
+        const { projectType } = req.body.projectType;
 
 		this.service.getProjectPerType(projectType)
 			.then( (testJson => res.status(200).json(testJson)) )
