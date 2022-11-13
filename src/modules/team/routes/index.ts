@@ -1,8 +1,7 @@
 import { Router } from 'express';
 import { Route } from '../../../Models';
 import { TeamService } from '../services' 
-import {Request, Response} from 'express';
-
+import { Request, Response } from 'express';
 
 class TeamRoutes implements Route {
 	router = Router();
