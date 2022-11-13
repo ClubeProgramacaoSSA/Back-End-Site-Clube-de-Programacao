@@ -7,7 +7,7 @@ export class TournamentService{
 		this.tableName = 'tb_torneio';
 	}
 
-    getAllTournament(){
+    getAll(){
         return new Promise((resolve,reject) => {
             connection(this.tableName)
             .join('tb_organizador', 'tb_organizador.id_organizador', '=', 'tb_torneio.id_organizador')
@@ -18,7 +18,7 @@ export class TournamentService{
 
     };
 
-    getEspecificTeamInTournament(id_team: number){ //Get a team in a tournament //NOT COMPLETE
+    getEspecificTeamIn(id_team: number){ //Get a team in a tournament //NOT COMPLETE
 
         return new Promise((resolve,reject) => {
             connection(this.tableName)

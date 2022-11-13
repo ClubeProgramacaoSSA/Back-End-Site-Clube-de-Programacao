@@ -10,7 +10,7 @@ export class MemberService {
 		this.tableName = 'tb_membro';
 	}
 
-	public getAllMembers() { //Get all members
+	public getAll() { //Get all members
 		return new Promise((resolve,reject) => {
 			connection( this.tableName )
 				.join('tb_curso_instituicao', 'tb_membro.id_curso_instituicao', '=', 'tb_curso_instituicao.id_curso_instituicao')
@@ -23,7 +23,7 @@ export class MemberService {
 		})
 	};
 
-	public getEspecificMember( idMember: number ){ //Get a especific member
+	public getEspecific( idMember: number ){ //Get a especific member
 		return new Promise((resolve,reject) => {
 			connection( this.tableName )
 				.join('tb_curso_instituicao', 'tb_membro.id_curso_instituicao', '=', 'tb_curso_instituicao.id_curso_instituicao')
@@ -39,7 +39,7 @@ export class MemberService {
 			})
 	};
 
-	public deleteEspecificMember(idMember: number){ //Delete a especific member
+	public deleteEspecific(idMember: number){ //Delete a especific member
 		return new Promise((resolve,reject) => {
 				connection(this.tableName)
 				.where('id_membro', idMember)
@@ -51,7 +51,7 @@ export class MemberService {
 		
 	};
 
-	public putEspecificMember(member: any){ //Update a especific member
+	public putEspecific(member: any){ //Update a especific member
 		return new Promise((resolve,reject) => {
 				connection(this.tableName)
 				.update(				
@@ -74,7 +74,7 @@ export class MemberService {
 		
 	};
 
-	public postEspecificMember(member: any){ //Update a especific member
+	public postEspecific(member: any){ //Update a especific member
 		return new Promise((resolve,reject) => {
 				connection(this.tableName)
 				.insert(				
