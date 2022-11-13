@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { Route } from '../../../Models';
-import { TournamentService } from '../../tournament/services';
+import { TournamentService } from '../services';
 import { Request, Response} from 'express';
 
 class TournamentRoutes implements Route {
@@ -14,8 +14,7 @@ class TournamentRoutes implements Route {
 	public initRoute() {
 		
 		this.router.get('/', this.getAllTournament); //Get all tournament
-		this.router.get('/especficTeam', this.service.getEspecificTeamInTournament); 
-		//Get a team in a tournament //NOT COMPLETE
+		this.router.get('/especficTeam/:id_team', this.service.getEspecificTeamInTournament); //Get a team in a tournament //NOT COMPLETE
 
 		return this.router;
 	}
@@ -29,7 +28,7 @@ class TournamentRoutes implements Route {
 
 	private getEspecificTeamInTournament = (req: Request,res:Response) => {
 		
-		const objTeamInTournament = req.body ;      
+		const { objTeamInTournament }  = req.params ;      
 
 		const id_member = req.params;
 		this.service.getEspecificTeamInTournament( parseInt(objTeamInTournament) )

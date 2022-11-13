@@ -13,9 +13,11 @@ export class MemberService {
 	public getAllMembers() { //Get all members
 		return new Promise((resolve,reject) => {
 			connection( this.tableName )
-			//.join('tb_curso_instituicao', 'tb_curso.id_curso', '=', 'tb_curso_instituicao.id_curso')
-				.select('*')
-			//.join('tb_instituicao_ensino', 'tb_curso_instituicao', 'tb_instituicao_ensino.id_instituicao_ensino', '=', 'tb_curso_instituicao.id_instituicao')
+				.join('tb_curso_instituicao', 'tb_membro.id_curso_instituicao', '=', 'tb_curso_instituicao.id_curso_instituicao')
+				.join('tb_curso', 'tb_curso_instituicao.id_curso', '=', 'tb_curso.id_curso')
+				.join('tb_instituicao_ensino', 'tb_curso_instituicao.id_instituicao', '=', 'tb_instituicao_ensino.id_instituicao_ensino')
+				.select('tb_membro.dt_ingresso_clube', 'tb_membro.dt_ingresso_faculdade', 'tb_membro.dt_nascimento', 'tb_membro.genero', 'tb_membro.nome_membro', 'tb_membro.oficio', 'tb_curso.nome_curso', 'tb_instituicao_ensino.nome_instituicao_ensino')
+
 				.then( testJson => resolve( testJson ) )
 				.catch( err => reject({ errMessage: err.message }) );
 		})
@@ -24,21 +26,27 @@ export class MemberService {
 	public getEspecificMember( idMember: number ){ //Get a especific member
 		return new Promise((resolve,reject) => {
 			connection( this.tableName )
-				.select('*')
+				.join('tb_curso_instituicao', 'tb_membro.id_curso_instituicao', '=', 'tb_curso_instituicao.id_curso_instituicao')
+				.join('tb_curso', 'tb_curso_instituicao.id_curso', '=', 'tb_curso.id_curso')
+				.join('tb_instituicao_ensino', 'tb_curso_instituicao.id_instituicao', '=', 'tb_instituicao_ensino.id_instituicao_ensino')
+				
+				.select('tb_membro.dt_ingresso_clube', 'tb_membro.dt_ingresso_faculdade', 'tb_membro.dt_nascimento', 'tb_membro.genero', 'tb_membro.nome_membro', 'tb_membro.oficio', 'tb_curso.nome_curso', 'tb_instituicao_ensino.nome_instituicao_ensino')
+				
 				.where('id_membro', idMember)
-				.then( testJson => resolve(testJson) )
-				.catch( err => reject({ errMessage: err.message}));
+
+				.then( testJson => resolve( testJson ) )
+				.catch( err => reject({ errMessage: err.message }) );
 			})
 	};
 
 	public deleteEspecificMember(idMember: number){ //Delete a especific member
-
 		return new Promise((resolve,reject) => {
 				connection(this.tableName)
 				.where('id_membro', idMember)
 				.del()
-				.then(testJson => resolve(testJson))
-				.catch( err => reject({ errMessage: err.message}));
+				
+				.then( testJson => resolve( testJson ) )
+				.catch( err => reject({ errMessage: err.message }) );
 			})
 		
 	};
