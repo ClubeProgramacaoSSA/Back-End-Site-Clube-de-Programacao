@@ -12,7 +12,7 @@ class ProjectRoutes implements Route {
 	
 	public initRoute() {
 		this.router.get('/', this.getAllProjects);
-		this.router.get('/projectType', this.getProjectPerType);
+		this.router.post('/projectType', this.getProjectPerType);
 		this.router.get('/:id_project', this.getEspecificProject);
 		this.router.post('/', this.postEspecificProject);
         this.router.put('/', this.updateEspecificProject);
@@ -59,7 +59,13 @@ class ProjectRoutes implements Route {
 	}
 
     private getProjectPerType = (req: Request,res:Response) => {
-        const { projectType } = req.body.projectType;
+        const { projectType } = req.body;
+
+		if(!projectType){
+			return res.status(400).json({
+				message: "Passe um tipo de projeto valido"
+			})		
+		}
 
 		this.projectService.getPerType(projectType)
 			.then( (testJson => res.status(200).json(testJson)) )

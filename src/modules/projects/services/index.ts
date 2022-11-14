@@ -81,7 +81,6 @@ export class ProjectService {
 			.catch( err => reject({ errMessage: err.message }) );
 
 		})
-		
 	};
 
 	public updateEspecific(project: any){ //Delete a especific member
@@ -107,8 +106,7 @@ export class ProjectService {
 		})	
 	};
     
-    public getPerType(projectType: String){ //Get project per type
-		projectType = projectType.toUpperCase()
+    public getPerType(projectType: string){ //Get project per type
 		
         return new Promise((resolve,reject) => {
             connection(this.tableName)
@@ -129,7 +127,7 @@ export class ProjectService {
             
 			.select('*')
             
-            .whereRaw(`UPPER(tb_tipo_projeto.tipo) LIKE ?`, `${projectType}`)
+            .whereRaw(`UPPER(tb_tipo_projeto.tipo) LIKE ?`, `${projectType.toUpperCase()}`)
 
 			.then( testJson => resolve( testJson ) )
 			.catch( err => reject({ errMessage: err.message }) );
