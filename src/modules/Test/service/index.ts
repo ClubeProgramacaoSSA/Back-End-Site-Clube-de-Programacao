@@ -7,12 +7,12 @@ import { IBaseCrudService } from "../../../Models";
 interface ITestTable {
     id: number;
     body: string;
-    createdAt:Date;
+    createdAt: Date;
     updatedAt: Date | null;
-    deletedAt:Date | null;
+    deletedAt: Date | null;
 }
 
-export class TestService implements IBaseCrudService {
+export class TestService implements IBaseCrudService<ITestTable> {
     testTable: string;
 
     constructor() {
@@ -25,12 +25,26 @@ export class TestService implements IBaseCrudService {
             .select('*');
     };
     public getAll() {
-        return connection(this.testTable)
-            .select('*');
+        return new Promise<ITestTable[]>((resolve, reject) => {
+            // Pode usar o async await tb;
+            // se tiverem mais familiarizados tb 
+            // mais vejam q o obj de connection do knex ja fala que o ele vai retornar um arr;
+            // so tipando o retorno dele ali no <FormatoDoObjEsperado>
+            connection<ITestTable>(this.testTable)
+                .select('*')
+                .then(testArr => resolve(testArr))
+                .catch(err => reject(err?.message ? { message: err.message } : err));
+        });
     };
-    // public update ({ body }:Partial<ITestTable>) {
-    //     return connection(this.testTable).update()
-    // };
+    public update(partialTbTable: Partial<ITestTable>) {
+        return new Promise<boolean>((resolve, reject) => {
+            // pode botar outra parametro pra dizer quais campoas vc quer retornar na promise!;
+            connection<ITestTable>(this.testTable)
+                .update( { ...partialTbTable } )
+                .then(data => resolve( true ) )
+                .catch(err => reject( err?.message ? { message: err.message } : err ) );
+        })
+    };
 
     // getAll?: ((...params: any[]) => Promise<any[]>) | undefined;
     // public store = () => {

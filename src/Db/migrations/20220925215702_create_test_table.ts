@@ -7,7 +7,6 @@ export async function up(knex: Knex): Promise<void> {
         tb.increments('id').unsigned();
         tb.text('body').notNullable();
         tb.timestamps( true, true );
-        tb.timestamp('updatedAt').defaultTo( null );
     });
 }
 

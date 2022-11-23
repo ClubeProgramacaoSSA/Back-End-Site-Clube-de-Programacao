@@ -10,17 +10,18 @@ import { memberRouter } from '../modules/member/routes/index';
 import cors from 'cors';
 
 export class MainRouter implements Route {
-    router = Router();
+    router: IRouter;
 
     app:Application;
 
     constructor(app:Application){
+        this.router = Router();
         this.app = app;
         this.router.use( cors() );
         this.initRoutes();
     }
 
-    // Loads Routes in the app!
+    // Loads Routes in the app!~
     public initRoutes () {
         console.log(`[${process.pid}-MainRouter]: Starting Routes...`)
         this.app.use( this.initRoute() );
@@ -28,9 +29,8 @@ export class MainRouter implements Route {
 
     // add the other routes right here!
     public initRoute() {
-		this.router.get('/',(req,res) => res.json({ id:1, message:"Hello Broda"}));
-		this.router.use("/test", testRouter.initRoute()); 
-
+		this.router.get('/',(req,res) => res.json({ id: 1.1, message:"Hello Broda", hasQuack: false }));
+		this.router.use("/test", testRouter.initRoute() ); 
         this.router.use("/projects", projectRouter.initRoute());
         this.router.use('/member', memberRouter.initRoute());  
         this.router.use('/team', teamRouter.initRoute());

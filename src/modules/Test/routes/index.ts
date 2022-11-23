@@ -1,27 +1,30 @@
 import { Router, IRouter, Request, Response } from 'express';
 import { Route } from '../../../Models';
-import { TestService } from '../service'
-import { connection } from '../../../Db/knex';
+import { TestService } from '../service';
 
-class TestRoutes implements Route {
-	router: IRouter;
+class TestRouter implements Route {
+	router = Router();
 	testService: TestService;
 	
 	constructor(){
-		this.router = Router();
 		this.testService = new TestService();
 	}
 	
 	public initRoute() {
-		this.router.get('/', this.getTest );
+		this.router.get('/', this.getAllTest );
+		this.router.post('/update', this.updateTest );
 
 		return this.router;
 	}
-	private getTest(req:Request,res: Response){
-		this.testService.get()
-			.then(data => res.status(200).json( data ))
+	private getAllTest(req:Request,res: Response){
+		this.testService.getAll()
+			.then(data => res.status(200).json( data )) // "data: ITestTable[]"
 			.catch(err => res.status(500).json({errMessage: err.message,...err}));
 	}
+	private updateTest (req:Request,res: Response) {
+		const { body } = req.body;
+		this.testService.update({body: body ?? 'Updated by knex'})
+	}
 }
+export const testRouter = new TestRouter();
 
-export const testRouter = new TestRoutes();
