@@ -4,7 +4,7 @@ import { IBaseCrudService } from "../../../Models";
 
 // type algo = IBaseCrudService & {id:string}
 
-interface ITestTable {
+export interface ITestTable {
     id: number;
     body: string;
     createdAt: Date;
