@@ -10,10 +10,11 @@ import { memberRouter } from '../modules/member/routes/index';
 import cors from 'cors';
 
 export class MainRouter implements Route {
-    router = Router();
+    private router: IRouter;
     private app: Application;
 
     constructor(app: Application) {
+        this.router = Router()
         this.app = app;
         this.initRoutes();
     }
