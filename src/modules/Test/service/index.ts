@@ -40,11 +40,22 @@ export class TestService implements IBaseCrudService<ITestTable> {
         return new Promise<boolean>((resolve, reject) => {
             // pode botar outra parametro pra dizer quais campoas vc quer retornar na promise!;
             connection<ITestTable>(this.testTable)
-                .update( { ...partialTbTable } )
-                .then(data => resolve( true ) )
-                .catch(err => reject( err?.message ? { message: err.message } : err ) );
+                .update({ ...partialTbTable })
+                .then(data => resolve(true))
+                .catch(err => reject(err?.message ? { message: err.message } : err));
         })
     };
+    public updateById(partialTbTable: Partial<ITestTable> & { id: number }) {
+        const { id } = partialTbTable;
+        return new Promise<boolean>((resolve, reject) => {
+            connection(this.testTable)
+                .update({ ...partialTbTable })
+                .where('id', id)
+
+                .then(() => resolve(true))
+                .catch(err => reject(err?.message ? { message: err.message } : err));
+        })
+    }
 
     // getAll?: ((...params: any[]) => Promise<any[]>) | undefined;
     // public store = () => {
