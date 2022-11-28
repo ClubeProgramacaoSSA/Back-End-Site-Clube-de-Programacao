@@ -1,11 +1,10 @@
 import { Router, IRouter, Application } from 'express';
 import { Route } from '../Models';
-import { testRouter } from '../modules/Test/routes/index';
-import { projectRouter } from '../modules/projects/routes/index';
-
-import { teamRouter } from '../modules/team/routes/index';
-import { tournamentRouter } from '../modules/tournament/routes/index';
-import { memberRouter } from '../modules/member/routes/index';
+import { testRouter } from '../modules/Test/routes';
+import { projectRouter } from '../modules/projects/routes';
+import { teamRouter } from '../modules/Team/routes';
+import { tournamentRouter } from '../modules/tournament/routes';
+import { memberRouter } from '../modules/Member/routes';
 
 import cors from 'cors';
 
