@@ -27,7 +27,7 @@ export class App {
     // Should load needed middlaware like auth, database-connection e other services!
     private startMiddlewares(){
         this.app.use(express.json());
-        this.app.use(cors())
+        this.app.use(cors());
     }
     // Call Main Router Constructor;
     private startRoutes(){
