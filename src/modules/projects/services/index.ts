@@ -25,7 +25,7 @@ export class ProjectService {
 			
 			//Join with tb_lider
 			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')
-            
+            //.select('tb_projeto.descricao', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_lider.nome_lider', 'tb_assunto.assunto')
 			.select('*')
 
 			.then( testJson => resolve( testJson ) )
@@ -51,7 +51,7 @@ export class ProjectService {
 			//Join with tb_lider
 			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')           
             
-			.select('*')
+			//.select('*')
 			.where('tb_projeto.id_projeto', idProject)
 
 			.then( testJson => resolve( testJson ) )
@@ -64,15 +64,16 @@ export class ProjectService {
 			connection(this.tableName)
 			.insert(				
 				{ 	
-					id_lider: project.lider,
-					id_imagem: project.id_imagem, 
-					id_tipo_projeto: project.id_tipo,
+					ID_lider: project.id_lider,
+					ID_imagem: project.id_imagem, 
+					ID_tipo_projeto: project.id_tipo_projeto,
 					descricao: project.descricao,
-					DT_inicio: project.dt_inicio,
-					DT_finalizacao_prevista: project.dt_finalizacao_prevista,
-					nome: project.body.nome,
+					DT_inicio: project.DT_inicio,
+					DT_termino_previsto: project.DT_termino_previsto,
+					DT_termino: project.dt_termino,
+					nome_projeto: project.body.nome_projeto,
 					ponto_jpq_maximo: project.ponto_jpq_maximo,
-					URL_github:project.body.url_github
+					URL_github: project.body.URL_github
 				}				
 			)
 			.into(this.tableName)
@@ -84,22 +85,18 @@ export class ProjectService {
 	};
 
 	public updateEspecific(project: any){ //Delete a especific member
-
+		console.log('project: ' + project.id_projeto + ' ' + project.id_lider + ' ' + project.id_tipo_projeto + ' ' + project.descricao + ' ' + project.DT_inicio + ' ' + project.DT_termino_previsto + ' ' + project.dt_termino + ' ' + project.nome_projeto, + ' ' + project.ponto_jpq_maximo + ' ' + project.URL_github)
+		
 		return new Promise((resolve,reject) => {
+			
 			connection(this.tableName)
+			.where('id_projeto', '=', project.id_projeto)
+			
 			.update({
-				lider: project.lider,
-				id_imagem: project.id_imagem, 
-				id_tipo_projeto: project.id_tipo,
-				descricao: project.descricao,
-				DT_inicio: project.dt_inicio,
-				DT_finalizacao_prevista: project.dt_finalizacao_prevista,
-				nome: project.body.nome,
-				ponto_jpq_maximo: project.ponto_jpq_maximo,
-				URL_github:project.body.url_github
-			})	
-
-			.where('id_project', project.id_project)
+				
+				ponto_jpq_maximo: project.ponto_jpq_maximo
+				
+			})		
 			
 			.then( testJson => resolve( testJson ) )
 			.catch( err => reject({ errMessage: err.message }) );

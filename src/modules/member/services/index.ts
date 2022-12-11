@@ -16,8 +16,10 @@ export class MemberService {
 				.join('tb_curso_instituicao', 'tb_membro.id_curso_instituicao', '=', 'tb_curso_instituicao.id_curso_instituicao')
 				.join('tb_curso', 'tb_curso_instituicao.id_curso', '=', 'tb_curso.id_curso')
 				.join('tb_instituicao_ensino', 'tb_curso_instituicao.id_instituicao', '=', 'tb_instituicao_ensino.id_instituicao_ensino')
-				.select('tb_membro.dt_ingresso_clube', 'tb_membro.dt_ingresso_faculdade', 'tb_membro.dt_nascimento', 'tb_membro.genero', 'tb_membro.nome_membro', 'tb_membro.oficio', 'tb_curso.nome_curso', 'tb_instituicao_ensino.nome_instituicao_ensino')
-				.select('*')
+				.join('tb_oficio', 'tb_oficio.id_oficio', '=', 'tb_membro.id_oficio')
+				.join('tb_imagem', 'tb_imagem.id_imagem', '=', 'tb_membro.id_foto_membro')
+				.select('tb_membro.dt_ingresso_clube', 'tb_membro.dt_ingresso_faculdade', 'tb_membro.dt_nascimento', 'tb_membro.genero', 'tb_membro.nome_membro', 'tb_oficio.nome_oficio', 'tb_curso.nome_curso', 'tb_instituicao_ensino.nome_instituicao_ensino')
+				//.select('*')
 				.then( testJson => resolve( testJson ) )
 				.catch( err => reject({ errMessage: err.message }) );
 		})
@@ -26,13 +28,15 @@ export class MemberService {
 	public getEspecific( idMember: number ){ //Get a especific member
 		return new Promise((resolve,reject) => {
 			connection( this.tableName )
-				.join('tb_curso_instituicao', 'tb_membro.id_curso_instituicao', '=', 'tb_curso_instituicao.id_curso_instituicao')
-				.join('tb_curso', 'tb_curso_instituicao.id_curso', '=', 'tb_curso.id_curso')
-				.join('tb_instituicao_ensino', 'tb_curso_instituicao.id_instituicao', '=', 'tb_instituicao_ensino.id_instituicao_ensino')
+			.join('tb_curso_instituicao', 'tb_membro.id_curso_instituicao', '=', 'tb_curso_instituicao.id_curso_instituicao')
+			.join('tb_curso', 'tb_curso_instituicao.id_curso', '=', 'tb_curso.id_curso')
+			.join('tb_instituicao_ensino', 'tb_curso_instituicao.id_instituicao', '=', 'tb_instituicao_ensino.id_instituicao_ensino')
+			.join('tb_oficio', 'tb_oficio.id_oficio', '=', 'tb_membro.id_oficio')
+			.join('tb_imagem', 'tb_imagem.id_imagem', '=', 'tb_membro.id_foto_membro')
+			.select('tb_membro.dt_ingresso_clube', 'tb_membro.dt_ingresso_faculdade', 'tb_membro.dt_nascimento', 'tb_membro.genero', 'tb_membro.nome_membro', 'tb_oficio.nome_oficio', 'tb_curso.nome_curso', 'tb_instituicao_ensino.nome_instituicao_ensino', 'tb_imagem.imagem')
+		
 				
-				.select('tb_membro.dt_ingresso_clube', 'tb_membro.dt_ingresso_faculdade', 'tb_membro.dt_nascimento', 'tb_membro.genero', 'tb_membro.nome_membro', 'tb_membro.oficio', 'tb_curso.nome_curso', 'tb_instituicao_ensino.nome_instituicao_ensino')
-				
-				.where('id_membro', idMember)
+			.where('id_membro', idMember)
 
 				.then( testJson => resolve( testJson ) )
 				.catch( err => reject({ errMessage: err.message }) );
@@ -53,17 +57,18 @@ export class MemberService {
 
 	public putEspecific(member: any){ //Update a especific member
 		return new Promise((resolve,reject) => {
+			console.log('MEMBRO genero: ' + member.ID_membro)
 			connection(this.tableName)
 			.update(				
 				{ 
-					id_curso_instituicao: member.id_curso_instituicao,
-					id_foto_membro: member.id_foto_membro,
-					dt_ingresso_clube: member.dt_ingresso_clube,
-					dt_ingresso_faculdade: member.dt_ingresso_faculdade,
-					dt_nascimento: member.dt_nascimento,
+					id_curso_instituicao: member.ID_curso_instituicao,
+					id_foto_membro: member.ID_foto_membro,
+					dt_ingresso_clube: member.DT_ingresso_clube,
+					dt_ingresso_faculdade: member.DT_ingresso_faculdade,
+					dt_nascimento: member.DT_nascimento,
 					genero: member.genero,
 					nome_membro: member.nome_membro,
-					oficio: member.oficio
+					id_oficio: member.ID_oficio
 				}				
 			)
 			.where('id_membro', member.id_membro)
@@ -78,14 +83,14 @@ export class MemberService {
 				connection(this.tableName)
 				.insert(				
 					{ 
-						id_curso_instituicao: member.id_curso_instituicao,
-						id_foto_membro: member.id_foto_membro,
-						dt_ingresso_clube: member.dt_ingresso_clube,
-						dt_ingresso_faculdade: member.dt_ingresso_faculdade,
-						dt_nascimento: member.dt_nascimento,
+						id_curso_instituicao: member.ID_curso_instituicao,
+						id_foto_membro: member.ID_foto_membro,
+						dt_ingresso_clube: member.DT_ingresso_clube,
+						dt_ingresso_faculdade: member.DT_ingresso_faculdade,
+						dt_nascimento: member.DT_nascimento,
 						genero: member.genero,
 						nome_membro: member.nome_membro,
-						oficio: member.oficio
+						id_oficio: member.ID_oficio
 					}				
 				)
 				
