@@ -25,7 +25,7 @@ export class ProjectService {
 			
 			//Join with tb_lider
 			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')
-            //.select('tb_projeto.descricao', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_lider.nome_lider', 'tb_assunto.assunto')
+            //.select('tb_projeto.descricao', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_lider.nome_lider', 'tb_assunto.assunto', 'tb_imagem.imagem')
 			.select('*')
 
 			.then( testJson => resolve( testJson ) )
@@ -51,6 +51,8 @@ export class ProjectService {
 			//Join with tb_lider
 			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')           
             
+			.select('tb_projeto.descricao', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_lider.nome_lider', 'tb_assunto.assunto', 'tb_imagem.imagem')
+			
 			//.select('*')
 			.where('tb_projeto.id_projeto', idProject)
 
@@ -64,16 +66,15 @@ export class ProjectService {
 			connection(this.tableName)
 			.insert(				
 				{ 	
-					ID_lider: project.id_lider,
-					ID_imagem: project.id_imagem, 
-					ID_tipo_projeto: project.id_tipo_projeto,
+					id_lider: project.id_lider,
+					id_tipo_projeto: project.id_tipo_projeto,
 					descricao: project.descricao,
-					DT_inicio: project.DT_inicio,
-					DT_termino_previsto: project.DT_termino_previsto,
-					DT_termino: project.dt_termino,
-					nome_projeto: project.body.nome_projeto,
+					dt_inicio: project.DT_inicio,
+					dt_termino_previsto: project.DT_termino_previsto,
+					dt_termino: project.dt_termino,
+					nome_projeto: project.nome_projeto,
 					ponto_jpq_maximo: project.ponto_jpq_maximo,
-					URL_github: project.body.URL_github
+					url_github: project.URL_github
 				}				
 			)
 			.into(this.tableName)
@@ -85,16 +86,21 @@ export class ProjectService {
 	};
 
 	public updateEspecific(project: any){ //Delete a especific member
-		console.log('project: ' + project.id_projeto + ' ' + project.id_lider + ' ' + project.id_tipo_projeto + ' ' + project.descricao + ' ' + project.DT_inicio + ' ' + project.DT_termino_previsto + ' ' + project.dt_termino + ' ' + project.nome_projeto, + ' ' + project.ponto_jpq_maximo + ' ' + project.URL_github)
-		
 		return new Promise((resolve,reject) => {
 			
 			connection(this.tableName)
-			.where('id_projeto', '=', project.id_projeto)
-			
+			.where('id_projeto', project.id_projeto)
 			.update({
 				
-				ponto_jpq_maximo: project.ponto_jpq_maximo
+				id_lider: project.id_lider,
+				id_tipo_projeto: project.id_tipo_projeto,
+				descricao: project.descricao,
+				dt_inicio: project.DT_inicio,
+				dt_termino_previsto: project.DT_termino_previsto,
+				dt_termino: project.dt_termino,
+				nome_projeto: project.nome_projeto,
+				ponto_jpq_maximo: project.ponto_jpq_maximo,
+				url_github: project.URL_github
 				
 			})		
 			
@@ -103,8 +109,7 @@ export class ProjectService {
 		})	
 	};
     
-    public getPerType(projectType: string){ //Get project per type
-		
+    public getPerType(projectType: string){ //Get project per type	
         return new Promise((resolve,reject) => {
             connection(this.tableName)
 
@@ -122,7 +127,9 @@ export class ProjectService {
 			//Join with tb_lider
 			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')
             
-			.select('*')
+			.select('tb_projeto.descricao', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_lider.nome_lider', 'tb_assunto.assunto', 'tb_imagem.imagem')
+			
+			//.select('*')
             
             .whereRaw(`UPPER(tb_tipo_projeto.tipo) LIKE ?`, `${projectType.toUpperCase()}`)
 

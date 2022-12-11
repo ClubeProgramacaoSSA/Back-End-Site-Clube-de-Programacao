@@ -12,7 +12,7 @@ class ProjectRoutes implements Route {
 	
 	public initRoute() {
 		this.router.get('/', this.getAllProjects);
-		this.router.post('/:projectType', this.getProjectPerType);
+		this.router.get('/:projectType', this.getProjectPerType);
 		this.router.get('/:id_project', this.getEspecificProject);
 		this.router.post('/', this.postEspecificProject);
         this.router.put('/', this.updateEspecificProject);

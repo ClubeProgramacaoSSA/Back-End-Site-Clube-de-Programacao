@@ -2,9 +2,9 @@ import { Router, IRouter, Application } from 'express';
 import { Route } from '../Models';
 import { testRouter } from '../modules/Test/routes';
 import { projectRouter } from '../modules/projects/routes';
-import { teamRouter } from '../modules/Team/routes';
+import { teamRouter } from '../modules/team/routes';
 import { tournamentRouter } from '../modules/tournament/routes';
-import { memberRouter } from '../modules/Member/routes';
+import { memberRouter } from '../modules/member/routes';
 
 import cors from 'cors';
 
