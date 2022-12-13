@@ -16,17 +16,18 @@ export class ProjectService {
             .join('tb_tipo_projeto', 'tb_projeto.id_tipo_projeto', '=', 'tb_tipo_projeto.id_tipo_projeto')    
             
             // Join with TB_imagem_projeto
-            .join('tb_imagem_projeto', 'tb_projeto.id_projeto', '=', 'tb_imagem_projeto.id_projeto')
-            .join('tb_imagem', 'tb_imagem_projeto.id_imagem', '=', 'tb_imagem.id_imagem')
+            .join('tb_imagem', 'tb_imagem.id_imagem', '=', 'tb_projeto.id_imagem_capa')
             
 			// Join with tb_assunto_projeto
-            .join('tb_assunto_projeto', 'tb_projeto.id_projeto', '=', 'tb_assunto_projeto.id_projeto')
-            .join('tb_assunto', 'tb_assunto_projeto.id_assunto', '=', 'tb_assunto.id_assunto')   
+            // .join('tb_assunto_projeto', 'tb_projeto.id_projeto', '=', 'tb_assunto_projeto.id_projeto')
+            // .join('tb_assunto', 'tb_assunto_projeto.id_assunto', '=', 'tb_assunto.id_assunto')   
 			
 			//Join with tb_lider
 			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')
-            //.select('tb_projeto.descricao', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_lider.nome_lider', 'tb_assunto.assunto', 'tb_imagem.imagem')
-			.select('*')
+            
+			.select('tb_projeto.descricao_projeto', 'tb_imagem.descricao_imagem', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_imagem.url_imagem', 'tb_lider.nome_lider')
+			
+			//.select('*')
 
 			.then( testJson => resolve( testJson ) )
 			.catch( err => reject({ errMessage: err.message }) );
@@ -38,20 +39,19 @@ export class ProjectService {
 			connection(this.tableName)
 
 			// Join with tb_tipo_projeto
-			.join('tb_tipo_projeto', 'tb_projeto.id_tipo_projeto', '=', 'tb_tipo_projeto.id_tipo_projeto')    
-
-			// Join with TB_imagem_projeto
-			.join('tb_imagem_projeto', 'tb_projeto.id_projeto', '=', 'tb_imagem_projeto.id_projeto')
-			.join('tb_imagem', 'tb_imagem_projeto.id_imagem', '=', 'tb_imagem.id_imagem')
-			
-			// Join with tb_assunto_projeto 
-			.join('tb_assunto_projeto', 'tb_projeto.id_projeto', '=', 'tb_assunto_projeto.id_projeto')
-			.join('tb_assunto', 'tb_assunto_projeto.id_assunto', '=', 'tb_assunto.id_assunto')   
+            .join('tb_tipo_projeto', 'tb_projeto.id_tipo_projeto', '=', 'tb_tipo_projeto.id_tipo_projeto')    
+            
+            // Join with TB_imagem_projeto
+            .join('tb_imagem', 'tb_imagem.id_imagem', '=', 'tb_projeto.id_imagem_capa')
+            
+			// Join with tb_assunto_projeto
+            // .join('tb_assunto_projeto', 'tb_projeto.id_projeto', '=', 'tb_assunto_projeto.id_projeto')
+            // .join('tb_assunto', 'tb_assunto_projeto.id_assunto', '=', 'tb_assunto.id_assunto')   
 			
 			//Join with tb_lider
-			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')           
+			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')
             
-			.select('tb_projeto.descricao', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_lider.nome_lider', 'tb_assunto.assunto', 'tb_imagem.imagem')
+			.select('tb_projeto.descricao_projeto', 'tb_imagem.descricao_imagem', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_imagem.url_imagem', 'tb_lider.nome_lider')
 			
 			//.select('*')
 			.where('tb_projeto.id_projeto', idProject)
@@ -61,9 +61,10 @@ export class ProjectService {
 		})
 	};
 
-	public postEspecific(project: any){ //Delete a especific project
+	public postEspecific(project: any){ //Insert a especific project
 		return new Promise((resolve,reject) => {
 			connection(this.tableName)
+			.into(this.tableName)
 			.insert(				
 				{ 	
 					id_lider: project.id_lider,
@@ -77,7 +78,7 @@ export class ProjectService {
 					url_github: project.URL_github
 				}				
 			)
-			.into(this.tableName)
+			
 
 			.then( testJson => resolve( testJson ) )
 			.catch( err => reject({ errMessage: err.message }) );
@@ -85,7 +86,7 @@ export class ProjectService {
 		})
 	};
 
-	public updateEspecific(project: any){ //Delete a especific member
+	public updateEspecific(project: any){ //Update a especific member
 		return new Promise((resolve,reject) => {
 			
 			connection(this.tableName)
@@ -117,17 +118,16 @@ export class ProjectService {
             .join('tb_tipo_projeto', 'tb_projeto.id_tipo_projeto', '=', 'tb_tipo_projeto.id_tipo_projeto')    
             
             // Join with TB_imagem_projeto
-            .join('tb_imagem_projeto', 'tb_projeto.id_projeto', '=', 'tb_imagem_projeto.id_projeto')
-            .join('tb_imagem', 'tb_imagem_projeto.id_imagem', '=', 'tb_imagem.id_imagem')
+            .join('tb_imagem', 'tb_imagem.id_imagem', '=', 'tb_projeto.id_imagem_capa')
             
-			// Join with tb_assunto_projeto 
-            .join('tb_assunto_projeto', 'tb_projeto.id_projeto', '=', 'tb_assunto_projeto.id_projeto')
-            .join('tb_assunto', 'tb_assunto_projeto.id_assunto', '=', 'tb_assunto.id_assunto')   
+			// Join with tb_assunto_projeto
+            // .join('tb_assunto_projeto', 'tb_projeto.id_projeto', '=', 'tb_assunto_projeto.id_projeto')
+            // .join('tb_assunto', 'tb_assunto_projeto.id_assunto', '=', 'tb_assunto.id_assunto')   
 			
 			//Join with tb_lider
 			.join('tb_lider', 'tb_lider.id_lider', '=', 'tb_projeto.id_lider')
             
-			.select('tb_projeto.descricao', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_lider.nome_lider', 'tb_assunto.assunto', 'tb_imagem.imagem')
+			.select('tb_projeto.descricao_projeto', 'tb_imagem.descricao_imagem', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_imagem.url_imagem', 'tb_lider.nome_lider')
 			
 			//.select('*')
             

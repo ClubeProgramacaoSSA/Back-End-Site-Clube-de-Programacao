@@ -19,6 +19,7 @@ export class MemberService {
 				.join('tb_oficio', 'tb_oficio.id_oficio', '=', 'tb_membro.id_oficio')
 				.join('tb_imagem', 'tb_imagem.id_imagem', '=', 'tb_membro.id_foto_membro')
 				.select('tb_membro.dt_ingresso_clube', 'tb_membro.dt_ingresso_faculdade', 'tb_membro.dt_nascimento', 'tb_membro.genero', 'tb_membro.nome_membro', 'tb_oficio.nome_oficio', 'tb_curso.nome_curso', 'tb_instituicao_ensino.nome_instituicao_ensino')
+				
 				//.select('*')
 				.then( testJson => resolve( testJson ) )
 				.catch( err => reject({ errMessage: err.message }) );
@@ -33,6 +34,7 @@ export class MemberService {
 			.join('tb_instituicao_ensino', 'tb_curso_instituicao.id_instituicao', '=', 'tb_instituicao_ensino.id_instituicao_ensino')
 			.join('tb_oficio', 'tb_oficio.id_oficio', '=', 'tb_membro.id_oficio')
 			.join('tb_imagem', 'tb_imagem.id_imagem', '=', 'tb_membro.id_foto_membro')
+			
 			.select('tb_membro.dt_ingresso_clube', 'tb_membro.dt_ingresso_faculdade', 'tb_membro.dt_nascimento', 'tb_membro.genero', 'tb_membro.nome_membro', 'tb_oficio.nome_oficio', 'tb_curso.nome_curso', 'tb_instituicao_ensino.nome_instituicao_ensino', 'tb_imagem.imagem')
 		
 				
