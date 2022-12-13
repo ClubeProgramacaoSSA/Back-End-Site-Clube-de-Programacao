@@ -10,8 +10,8 @@ export class TeamService{
     public getAll() { //Get all teams
         return new Promise((resolve,reject) => {
             connection( this.tableName )
-                .join('tb_membro_equipe', 'tb_equipe.id_equipe', '=', 'tb_membro_equipe.id_equipe')
-                .join('tb_membro', 'tb_membro_equipe.id_membro', '=', 'tb_membro.id_membro')
+                //.join('tb_membro_equipe', 'tb_equipe.id_equipe', '=', 'tb_membro_equipe.id_equipe')
+                //.join('tb_membro', 'tb_membro_equipe.id_membro', '=', 'tb_membro.id_membro')
                 .join('tb_capitao', 'tb_capitao.id_capitao', '=', 'tb_equipe.id_capitao')
                 .select('*')
 
@@ -24,8 +24,8 @@ export class TeamService{
         const id_team = idTeam;
         return new Promise((resolve,reject) => {
             connection(this.tableName)
-                .join('tb_membro_equipe', 'tb_equipe.id_equipe', '=', 'tb_membro_equipe.id_equipe')
-                .join('tb_membro', 'tb_membro_equipe.id_membro', '=', 'tb_membro.id_membro')
+                //.join('tb_membro_equipe', 'tb_equipe.id_equipe', '=', 'tb_membro_equipe.id_equipe')
+                //.join('tb_membro', 'tb_membro_equipe.id_membro', '=', 'tb_membro.id_membro')
                 .select('*')
                 .where('tb_equipe.id_equipe', id_team)
 
@@ -40,9 +40,9 @@ export class TeamService{
             connection(this.tableName)
             .insert(				
                 { 
-                    nome: team.nome,
-                    id_captain: team.id_capitao,
-                    DT_criacao: team.DT_criacao
+                    nome_equipe: team.nome_equipe,
+                    id_capitao: team.id_capitao,
+                    dt_criacao: team.DT_criacao
                 }				
             )
             .into(this.tableName) 

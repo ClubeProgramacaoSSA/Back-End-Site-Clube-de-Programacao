@@ -27,7 +27,7 @@ export class ProjectService {
             
 			.select('tb_projeto.descricao_projeto', 'tb_imagem.descricao_imagem', 'tb_projeto.dt_inicio', 'tb_projeto.dt_termino_previsto', 'tb_projeto.dt_termino', 'tb_projeto.nome_projeto', 'tb_projeto.url_github', 'tb_tipo_projeto.tipo', 'tb_imagem.nome_imagem', 'tb_imagem.dt_imagem', 'tb_imagem.url_imagem', 'tb_lider.nome_lider')
 			
-			//.select('*')
+			.select('*')
 
 			.then( testJson => resolve( testJson ) )
 			.catch( err => reject({ errMessage: err.message }) );
@@ -68,9 +68,10 @@ export class ProjectService {
 			.insert(				
 				{ 	
 					id_lider: project.id_lider,
+					id_imagem_capa: project.id_imagem_capa,
 					id_tipo_projeto: project.id_tipo_projeto,
-					descricao: project.descricao,
-					dt_inicio: project.DT_inicio,
+					descricao_projeto: project.descricao_projeto,
+					dt_inicio: project.dt_inicio,
 					dt_termino_previsto: project.DT_termino_previsto,
 					dt_termino: project.dt_termino,
 					nome_projeto: project.nome_projeto,
@@ -94,9 +95,10 @@ export class ProjectService {
 			.update({
 				
 				id_lider: project.id_lider,
+				id_imagem_capa: project.id_imagem_capa,
 				id_tipo_projeto: project.id_tipo_projeto,
-				descricao: project.descricao,
-				dt_inicio: project.DT_inicio,
+				descricao_projeto: project.descricao_projeto,
+				dt_inicio: project.dt_inicio,
 				dt_termino_previsto: project.DT_termino_previsto,
 				dt_termino: project.dt_termino,
 				nome_projeto: project.nome_projeto,
