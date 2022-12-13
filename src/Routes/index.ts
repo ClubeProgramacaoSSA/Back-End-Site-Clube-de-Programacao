@@ -32,7 +32,9 @@ export class MainRouter implements Route {
         this.router.use('/member', memberRouter.initRoute());
         this.router.use('/team', teamRouter.initRoute());
         this.router.use('/tournament', tournamentRouter.initRoute());
-
+        this.router.get('*',(req,res) => {
+            res.send(404).json({message: 'Sem Rota com esssa URI'})
+        })
         return this.router;
     }
 }
