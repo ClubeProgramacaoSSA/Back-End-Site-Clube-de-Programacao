@@ -65,7 +65,7 @@ class ProjectRoutes implements Route {
 
 		if(!projectType){
 			return res.status(400).json({
-				message: "Passe um tipo de projeto valido"
+				message: "Passe um tipo de projeto"
 			})		
 		}
 

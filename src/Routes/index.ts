@@ -27,13 +27,15 @@ export class MainRouter implements Route {
     // add the other routes right here!
     public initRoute() {
         this.router.get('/', (req, res) => res.json({ message:'Bem-Vindo a API do Clube de Programação', hasQuack: false }));
+        
         this.router.use("/test", testRouter.initRoute());
         this.router.use("/projects", projectRouter.initRoute());
         this.router.use('/member', memberRouter.initRoute());
         this.router.use('/team', teamRouter.initRoute());
         this.router.use('/tournament', tournamentRouter.initRoute());
+
         this.router.get('*',(req,res) => {
-            res.send(404).json({message: 'Sem Rota com esssa URI'})
+            res.send(404).json({message: 'Sem Rota com essa URI'})
         })
         return this.router;
     }
