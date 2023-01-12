@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:18-bullseye
 
 WORKDIR /app
 
@@ -8,10 +8,8 @@ RUN npm install
 
 COPY . .
 
-
 EXPOSE 8080
 
-CMD ["npm","run","start:prod"]
+ENV NODE_ENV development
 
-
-
+CMD ["yarn","dev"]
