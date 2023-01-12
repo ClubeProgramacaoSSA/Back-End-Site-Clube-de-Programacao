@@ -1,5 +1,5 @@
 # Back-End-Site-Clube-de-Programacao
-This is the Back-End part repository of the main repository Site-Clube-De-Programacao
+This is the Back-End part repository of the main project.
 
 <h1 align="center">🦆 Back-End-Site-Clube-de-Programacao 🦆</h1>
 
