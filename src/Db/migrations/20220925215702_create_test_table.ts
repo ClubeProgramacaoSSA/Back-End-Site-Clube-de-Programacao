@@ -4,10 +4,9 @@ const tableName = 'tb_test';
 
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable(tableName,function(tb){
-        tb.increments('id');
+        tb.increments('id').unsigned();
         tb.text('body').notNullable();
-        tb.timestamp('createdAt').defaultTo(knex.fn.now());
-        tb.timestamp('updatedAt');
+        tb.timestamps( true, true );
     });
 }
 

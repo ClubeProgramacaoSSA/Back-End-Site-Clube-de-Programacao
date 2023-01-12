@@ -1,7 +1,8 @@
 import express,{ Application } from 'express';
 import { createServer,Server } from 'http';
 import { config } from 'dotenv';
-import { MainRouter } from '../Routes'
+import { MainRouter } from '../Routes';
+import cors from 'cors'
 
 export class App {
     private static instance: App;
@@ -26,6 +27,7 @@ export class App {
     // Should load needed middlaware like auth, database-connection e other services!
     private startMiddlewares(){
         this.app.use(express.json());
+        this.app.use(cors());
     }
     // Call Main Router Constructor;
     private startRoutes(){

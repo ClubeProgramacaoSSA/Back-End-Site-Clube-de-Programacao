@@ -1,0 +1,25 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "user",
+            "database": "postgres",
+            "username": "user",
+            "password": "password123",
+            "group": "password123"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "postgres",
+            "database": "TesteNandao",
+            "username": "postgres",
+            "password": "docker"
+        }
+    ]
+}
