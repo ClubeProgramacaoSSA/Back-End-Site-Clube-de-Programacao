@@ -53,7 +53,7 @@ by other club members.</br>
 
 &emsp;&emsp;&emsp; Some of the main functionalities of this application are:
 
-- Creation of accounts and projects and registration in tournaments by club members, done through queries using PUT, POST and GET routes implemented in the code. These routes interact with [SENAI CIMATEC Programming Clube Database](https://github.com/ClubeProgramacaoSSA/Programing-Club-Relational-Database#the-future) whenever there are any requests by the [front-end screens](https://github.com/ClubeProgramacaoSSA/Front-End-Site-Clube-de-Programacao) from the programming club website.
+- Creation of accounts and projects and registration in tournaments by club members, done through queries using PUT, POST and GET routes implemented in the code. These routes interact with [SENAI CIMATEC Programming Clube Database](https://github.com/ClubeProgramacaoSSA/Programing-Club-Relational-Database#the-future) whenever there are any requests by the [front-end screens](https://github.com/ClubeProgramacaoSSA/Front-End-Site-Clube-de-Programacao) from the programming club website. The back-end documentation is at the swagger [here](https://app.swaggerhub.com/apis/orlandomotapires/ClubeDeProgramacao/2.0)
 
 ---
 
