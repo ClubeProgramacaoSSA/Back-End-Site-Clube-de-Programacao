@@ -29,9 +29,9 @@
 ## Description
 
 <div align = "justify">
-&emsp;&emsp;&emsp; The Gangnam Style project consists of the development of a website for the <a href = "https://github.com/ClubeProgramacaoSSA">SENAI CIMATEC Programming Club</a>. The site will function as an exhibition banner for the club's advertising activities and as an integration tool between the Relational Database Project previously developed
+&emsp;&emsp;&emsp; The Gangnam Style project consists of the development of a website for the <a href = "https://github.com/ClubeProgramacaoSSA">SENAI CIMATEC Programming Club</a>. The site will function as an exhibition banner for the club's advertising activities and as an integration tool between the Relational Database Project previously developed.
 by other club members.</br>
-&emsp;&emsp;&emsp; This repository contains the API responsible for answering requests from other services made by other club services and is a central product at Gangnam Style Project. All documentation related to the project will be available <a href ="https://drive.google.com/drive/folders/1RJ7gmUiI1yTD119yCH66UnsJEl0hF3kf?usp=sharing">here</a> on Google Drive.</br>
+&emsp;&emsp;&emsp; This repository contains the API responsible for answering requests from other services made by other club services and is a central product at Gangnam Style Project. All documentation related to the project will be available <a href ="https://drive.google.com/drive/folders/1RJ7gmUiI1yTD119yCH66UnsJEl0hF3kf?usp=sharing">here</a> on Google Drive and [here](https://app.swaggerhub.com/apis/orlandomotapires/ClubeDeProgramacao/2.0) at swagger.</br>
 </div>
 
 ---
@@ -53,7 +53,7 @@ by other club members.</br>
 
 &emsp;&emsp;&emsp; Some of the main functionalities of this application are:
 
-- Creation of accounts and projects and registration in tournaments by club members, done through queries using PUT, POST and GET routes implemented in the code. These routes interact with [SENAI CIMATEC Programming Clube Database](https://github.com/ClubeProgramacaoSSA/Programing-Club-Relational-Database#the-future) whenever there are any requests by the [front-end screens](https://github.com/ClubeProgramacaoSSA/Front-End-Site-Clube-de-Programacao) from the programming club website. The back-end documentation is at the swagger [here](https://app.swaggerhub.com/apis/orlandomotapires/ClubeDeProgramacao/2.0)
+- Creation of accounts and projects and registration in tournaments by club members, done through queries using PUT, POST and GET routes implemented in the code. These routes interact with [SENAI CIMATEC Programming Clube Database](https://github.com/ClubeProgramacaoSSA/Programing-Club-Relational-Database#the-future) whenever there are any requests by the [front-end screens](https://github.com/ClubeProgramacaoSSA/Front-End-Site-Clube-de-Programacao) from the programming club website.
 
 ---
 
