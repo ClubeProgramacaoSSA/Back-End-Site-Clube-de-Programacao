@@ -19,7 +19,6 @@
 - [Pedro Facundes](https://github.com/FacundesPedro) - _Project Leader_ (06/30/2022 - now)
 - [Antônio Horácio](https://github.com/AntonioHoracio77) (06/30/2022 - now)
 - [Bernardo Resende](https://github.com/BernardoSResende) (12/01/2023 - now)
-- [Orlando Mota Pires](https://github.com/orlandomotapires) (06/30/2022 - now)
 - [Fernando Antonio Marques Schettini](https://github.com/FernandoSchett) (06/30/2022 - now)
 - [Orlando Mota Pires](https://github.com/orlandomotapires) (06/30/2022 - now)
 - [Pedro Barros](https://github.com/pedrobarros01) - (06/30/2022 - 12/13/2022)
