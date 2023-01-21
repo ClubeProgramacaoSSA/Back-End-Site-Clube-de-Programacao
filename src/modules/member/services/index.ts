@@ -11,7 +11,7 @@ export class MemberService {
 	}
 
 	public getAll() { //Get all members
-		return new Promise((resolve,reject) => {
+		return new Promise((resolve,reject) => { //Queijo
 			connection( this.tableName )
 				.join('tb_curso_instituicao', 'tb_membro.id_curso_instituicao', '=', 'tb_curso_instituicao.id_curso_instituicao')
 				.join('tb_curso', 'tb_curso_instituicao.id_curso', '=', 'tb_curso.id_curso')
