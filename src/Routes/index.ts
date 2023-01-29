@@ -5,6 +5,8 @@ import { projectRouter } from '../modules/projects/routes';
 import { teamRouter } from '../modules/team/routes';
 import { tournamentRouter } from '../modules/tournament/routes';
 import { memberRouter } from '../modules/member/routes';
+import { routeNotFound } from '../Middlewares/notFound';
+import { errorHandler } from '../Middlewares/errorHandling';
 
 import cors from 'cors';
 
@@ -21,7 +23,7 @@ export class MainRouter implements Route {
     // Loads Routes in the app!~
     public initRoutes() {
         console.log(`[${process.pid}-MainRouter]: Starting Routes...`)
-        return this.app.use( this.initRoute() );
+        this.app.use( this.initRoute() );
     }
 
     // add the other routes right here!
@@ -34,9 +36,9 @@ export class MainRouter implements Route {
         this.router.use('/team', teamRouter.initRoute());
         this.router.use('/tournament', tournamentRouter.initRoute());
 
-        this.router.get('*',(req,res) => {
-            res.send(404).json({message: 'Sem Rota com essa URI'})
-        })
+        // this.router.get('*',(req,res) => {
+        //     res.send(404).json({message: 'Sem Rota com essa URI'})
+        // })
         return this.router;
     }
 }

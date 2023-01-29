@@ -27,7 +27,7 @@ export class TestService implements IBaseCrudService<ITestTable> {
     public getAll() {
         return new Promise<ITestTable[]>((resolve, reject) => {
             // Pode usar o async await tb;
-            // se tiverem mais familiarizados tb 
+            // se tiverem mais familiarizados
             // mais vejam q o obj de connection do knex ja fala que o ele vai retornar um arr;
             // so tipando o retorno dele ali no <FormatoDoObjEsperado>
             connection<ITestTable>(this.testTable)
@@ -55,7 +55,7 @@ export class TestService implements IBaseCrudService<ITestTable> {
                 .then(() => resolve(true))
                 .catch(err => reject(err?.message ? { message: err.message } : err));
         })
-    }
+    };
 
     // getAll?: ((...params: any[]) => Promise<any[]>) | undefined;
     // public store = () => {
