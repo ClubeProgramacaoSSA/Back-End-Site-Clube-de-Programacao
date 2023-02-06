@@ -3,6 +3,7 @@ import { Knex } from "knex";
 const tableName = 'tb_test';
 
 export async function up(knex: Knex): Promise<void> {
+    // knex.schema.createSchema('type').
     return knex.schema.createTable(tableName,function(tb){
         tb.increments('id').unsigned();
         tb.text('body').notNullable();
