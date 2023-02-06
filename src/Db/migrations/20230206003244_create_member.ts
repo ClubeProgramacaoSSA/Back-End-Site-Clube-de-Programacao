@@ -3,8 +3,8 @@ import { Knex } from "knex";
 const tableName = 'members';
 
 export async function up(knex: Knex): Promise<void> {
-    return knex.schema.createTableIfNotExists(tableName, (table) => {
-        table.uuid('id').primary().defaultTo(knex.raw(`(UUID())`));
+    return knex.schema.createTable(tableName, (table) => {
+        table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('started_at').notNullable();
         table.timestamp('maybe_end_at').notNullable();

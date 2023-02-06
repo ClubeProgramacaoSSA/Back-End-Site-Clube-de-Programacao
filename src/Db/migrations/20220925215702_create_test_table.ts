@@ -2,8 +2,9 @@ import { Knex } from "knex";
 
 const tableName = 'tb_test';
 
+// set uuid v4 extension on database 
 export async function up(knex: Knex): Promise<void> {
-    // knex.schema.createSchema('type').
+    knex.raw('create extension if not exists "uuid-ossp"')
     return knex.schema.createTable(tableName,function(tb){
         tb.increments('id').unsigned();
         tb.text('body').notNullable();
