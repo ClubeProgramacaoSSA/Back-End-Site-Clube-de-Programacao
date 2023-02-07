@@ -6,12 +6,11 @@ export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable(tableName, (table) => {
         table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
         table.timestamp('created_at').defaultTo(knex.fn.now());
-        table.timestamp('started_at').notNullable();
-        table.timestamp('maybe_end_at').notNullable();
-        table.text('description').nullable();
-        table.text('repository_url').nullable();
-        table.text('pdf_url').nullable();
-        table.text('born_at').nullable();
+        table.timestamp('born_at').nullable();
+        table.timestamp('started_course_at').notNullable();
+        table.timestamp('updated_at').nullable();
+        table.enum('gender',['male','female','unknown'])
+        table.text('description').nullable();   
     })
 }
 
