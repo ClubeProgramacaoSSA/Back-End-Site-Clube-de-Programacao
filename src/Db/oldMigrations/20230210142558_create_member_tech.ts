@@ -1,14 +1,13 @@
 import { Knex } from "knex";
 
-const tableName = 'projects';
+const tableName = 'member_tech';
 
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable(tableName,(table) => {
         table.increments('id').primary();
-        table.integer('activity_id').references('id').inTable('activities');
-        table.text('pdf_url').nullable();
-        table.text('repository_url').notNullable();
-    })
+        table.uuid('member_id').references('id').inTable('members');
+        table.integer('tech_id').references('id').inTable('techs');
+    });
 }
 
 

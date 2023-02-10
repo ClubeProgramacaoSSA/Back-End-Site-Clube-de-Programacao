@@ -9,8 +9,9 @@ export async function up(knex: Knex): Promise<void> {
         table.timestamp('born_at').nullable();
         table.timestamp('started_course_at').notNullable();
         table.timestamp('updated_at').nullable();
-        table.enum('gender',['male','female','unknown'])
+        table.enum('gender',['male','female','nandão','unknown'])
         table.text('description').nullable();   
+        table.text('name').notNullable();  
     })
 }
 

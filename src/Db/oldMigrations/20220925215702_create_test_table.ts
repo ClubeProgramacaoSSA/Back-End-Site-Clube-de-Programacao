@@ -4,7 +4,7 @@ const tableName = 'tb_test';
 
 export async function up(knex: Knex): Promise<void> {
     // set uuid v4 extension on database 
-    await knex.raw('create extension if not exists "uuid-ossp"')
+    knex.raw('create extension if not exists "uuid-ossp"')
     return knex.schema.createTable(tableName,function(tb){
         tb.increments('id').unsigned();
         tb.text('body').notNullable();
