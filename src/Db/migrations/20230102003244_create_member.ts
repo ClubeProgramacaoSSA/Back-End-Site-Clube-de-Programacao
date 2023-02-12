@@ -11,7 +11,7 @@ export async function up(knex: Knex): Promise<void> {
         table.timestamp('updated_at').nullable();
         table.enum('gender',['male','female','nandão','unknown'])
         table.text('description').nullable();   
-        table.text('name').notNullable();  
+        table.text('fullname').notNullable();  
     })
 }
 

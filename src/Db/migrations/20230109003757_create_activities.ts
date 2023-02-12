@@ -11,8 +11,9 @@ export async function up(knex: Knex): Promise<void> {
         table.timestamp('started_at').notNullable();
         table.timestamps(true,true);
         table.timestamp('maybe_end_at').notNullable();
-        table.text('description').notNullable();
+        table.string('description').notNullable();
         table.integer('xp').notNullable();
+        table.string('name').notNullable();
     });
 }
 
