@@ -21,5 +21,10 @@
             "username": "postgres",
             "password": "docker"
         }
+    ],
+    "cSpell.words": [
+        "Facundes",
+        "fullname",
+        "hahaha"
     ]
 }
