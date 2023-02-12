@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:lts-bullseye-slim
 
 WORKDIR /app
 
@@ -10,7 +10,6 @@ COPY . .
 
 EXPOSE 8080
 
-CMD [ "npm","run","dev" ]
+ENV NODE_ENV development
 
-
-
+CMD ["yarn","dev"]

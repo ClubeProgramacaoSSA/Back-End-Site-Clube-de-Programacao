@@ -3,11 +3,12 @@ import { Knex } from "knex";
 const tableName = 'tb_test';
 
 export async function up(knex: Knex): Promise<void> {
+    // set uuid v4 extension on database 
+    await knex.raw('create extension if not exists "uuid-ossp"')
     return knex.schema.createTable(tableName,function(tb){
-        tb.increments('id');
+        tb.increments('id').unsigned();
         tb.text('body').notNullable();
-        tb.timestamp('createdAt').defaultTo(knex.fn.now());
-        tb.timestamp('updatedAt');
+        tb.timestamps( true, true );
     });
 }
 

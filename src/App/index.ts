@@ -1,7 +1,9 @@
 import express,{ Application } from 'express';
 import { createServer,Server } from 'http';
-import { config } from 'dotenv';
 import { MainRouter } from '../Routes';
+import cors from 'cors'
+import { routeNotFound } from '../Middlewares/notFound';
+import { errorHandler } from '../Middlewares/errorHandling';
 
 export class App {
     private static instance: App;
@@ -22,10 +24,16 @@ export class App {
         this.port = parseInt( process.env.PORT ?? '8080' );
         this.startMiddlewares();
         this.startRoutes();
+        this.startExtraMiddlewares();
     }
     // Should load needed middlaware like auth, database-connection e other services!
     private startMiddlewares(){
         this.app.use(express.json());
+        this.app.use(cors());
+    }
+    private startExtraMiddlewares(){
+        this.app.use(routeNotFound);
+        this.app.use(errorHandler);
     }
     // Call Main Router Constructor;
     private startRoutes(){
@@ -33,7 +41,7 @@ export class App {
     }
     // start the HTTP server listening on the port provaded in constructor or by ENV_VAR;
     public start () {
-        this.server.listen( this.port,() => {
+        return this.server.listen( this.port,() => {
             console.log(`App running in ${this.port}`);
         });
     }

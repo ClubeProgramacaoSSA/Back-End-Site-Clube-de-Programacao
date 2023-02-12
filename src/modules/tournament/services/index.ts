@@ -18,19 +18,21 @@ export class TournamentService{
 
     };
 
-    getEspecificTeamIn(id_team: number){ //Get a team in a tournament //NOT COMPLETE
+    // getEspecificTeamIn(id_team: number){ //Get a team in a tournament //NOT COMPLETE
 
-        return new Promise((resolve,reject) => {
-            connection(this.tableName)
-            .select('*')
-            .join('tb_team_tournament', 'tb_team.id_team', '=', 'tb_team_tournament.id_team')
-            .where('id_team', id_team)
-            //.andWhere('id_tournament', objTeamInTournament.id_tournament)
+    //     return new Promise((resolve,reject) => {
+    //         connection(this.tableName)
+            
+    //         .join('tb_equipe_torneio', 'tb_equipe.id_equipe', '=', 'tb_equipe_torneio.id_equipe')
+            
+    //         .where('id_equipe', id_team)
+    //         //.andWhere('id_tournament', objTeamInTournament.id_tournament)
 
-            .then( testJson => resolve( testJson ) )
-			.catch( err => reject({ errMessage: err.message }) );
-        })     
-    };
+    //         .select('*')
+    //         .then( testJson => resolve( testJson ) )
+	// 		.catch( err => reject({ errMessage: err.message }) );
+    //     })     
+    // };
 	
 }
 

@@ -56,7 +56,6 @@ const knexConfig: {[key:string]: Knex.Config} = {
       tableName: "knex_migrations"
     }
   }*/
-
 };
 
 //AMOR
