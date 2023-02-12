@@ -7,7 +7,8 @@ export async function up(knex: Knex): Promise<void> {
         table.increments('id').primary().unsigned();
         table.string('email').notNullable();
         table.string('password').notNullable();
-        table.string('cpf').notNullable();
+        // will save with points ?
+        table.string('cpf',14).notNullable();
         table.string('username').unique().notNullable();
     });
 }
