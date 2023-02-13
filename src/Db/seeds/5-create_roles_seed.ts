@@ -1,24 +1,24 @@
-import { Knex } from "knex";
+// import { Knex } from "knex";
 
-const tableName = 'roles';
+// const tableName = 'roles';
 
-export async function seed(knex: Knex): Promise<void> {
-    // Deletes ALL existing entries
-    await knex(tableName).del();
+// export async function seed(knex: Knex): Promise<void> {
+//     // Deletes ALL existing entries
+//     await knex(tableName).del();
 
-    // Inserts seed entries
-    await knex(tableName).insert([
-        { 
-            name: "Capitao" 
-        },
+//     // Inserts seed entries
+//     await knex(tableName).insert([
+//         { 
+//             name: "Capitao" 
+//         },
 
-        { 
-            name: "Estagiario" 
-        },
+//         { 
+//             name: "Estagiario" 
+//         },
 
-        { 
-            name: "Faz nada" 
-        },
+//         { 
+//             name: "Faz nada" 
+//         },
         
-    ]);
-};
+//     ]);
+// };
