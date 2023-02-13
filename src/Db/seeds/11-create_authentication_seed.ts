@@ -1,6 +1,6 @@
 import { Knex } from "knex";
 
-const tableName = 'tb_test';
+const tableName = 'authentication'
 
 export async function seed(knex: Knex): Promise<void> {
     // Deletes ALL existing entries
@@ -8,8 +8,12 @@ export async function seed(knex: Knex): Promise<void> {
 
     // Inserts seed entries
     await knex(tableName).insert([
-        { id: 1, colName: "rowValue1" },
-        { id: 2, colName: "rowValue2" },
-        { id: 3, colName: "rowValue3" }
+        { 
+            email: "QueijoBom@Hotmail.com", 
+            password: "QueijoBom",
+            cpf: "715.615.921-18",
+            username: "Abacaxi Com Queijo" 
+        }
+        
     ]);
 };
