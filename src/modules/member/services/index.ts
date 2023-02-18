@@ -7,19 +7,12 @@ export class MemberService {
     private tableName:string;
 
 	constructor(){
-		this.tableName = 'tb_membro';
+		this.tableName = 'members';
 	}
 
 	public getAll() { //Get all members
 		return new Promise((resolve,reject) => { //Queijo
 			connection( this.tableName )
-				.join('tb_curso_instituicao', 'tb_membro.id_curso_instituicao', '=', 'tb_curso_instituicao.id_curso_instituicao')
-				.join('tb_curso', 'tb_curso_instituicao.id_curso', '=', 'tb_curso.id_curso')
-				.join('tb_instituicao_ensino', 'tb_curso_instituicao.id_instituicao', '=', 'tb_instituicao_ensino.id_instituicao_ensino')
-				.join('tb_oficio', 'tb_oficio.id_oficio', '=', 'tb_membro.id_oficio')
-				.join('tb_imagem', 'tb_imagem.id_imagem', '=', 'tb_membro.id_foto_membro')
-				.select('tb_membro.dt_ingresso_clube', 'tb_membro.dt_ingresso_faculdade', 'tb_membro.dt_nascimento', 'tb_membro.genero', 'tb_membro.nome_membro', 'tb_oficio.nome_oficio', 'tb_curso.nome_curso', 'tb_instituicao_ensino.nome_instituicao_ensino')
-				
 				.select('*')
 				.then( testJson => resolve( testJson ) )
 				.catch( err => reject({ errMessage: err.message }) );

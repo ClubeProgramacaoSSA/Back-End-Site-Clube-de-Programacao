@@ -1,6 +1,6 @@
 import { Knex } from "knex";
 
-const tableName = 'member_activity';
+const tableName = 'member_tech';
 
 export async function seed(knex: Knex): Promise<void> {
     // Deletes ALL existing entries
@@ -11,17 +11,17 @@ export async function seed(knex: Knex): Promise<void> {
         .from('members')
         .where({fullname: 'Orlando Mota Pires'});
 
-    const var_activity_id = knex
+    const var_tech_id = knex
         .select('id')
-        .from('activities')
-        .where({name: 'Projeto do site do Clube'});
+        .from('techs')
+        .where({name: "CPP"});
 
     // Inserts seed entries
     await knex(tableName).insert([
         { 
-            activity_id: var_activity_id, 
-            member_id: var_member_id   
-        }
-        
+            member_id: var_member_id, 
+            tech_id: var_tech_id 
+        },
+
     ]);
 };
