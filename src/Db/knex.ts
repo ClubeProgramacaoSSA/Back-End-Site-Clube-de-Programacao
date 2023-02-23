@@ -6,5 +6,10 @@ const NODE_ENV = process.env.NODE_ENV;
 
 if(!NODE_ENV) throw Error('No env type selected!')
 
-export const getKnexConfig = () => console.log( knexConfig[ NODE_ENV ] );
-export const connection = knex( knexConfig[ NODE_ENV ] );
+const getKnexConfig = () => console.log( knexConfig[ NODE_ENV ] );
+const connection = knex( knexConfig[ NODE_ENV ] );
+
+export {
+    connection,
+    getKnexConfig
+}
