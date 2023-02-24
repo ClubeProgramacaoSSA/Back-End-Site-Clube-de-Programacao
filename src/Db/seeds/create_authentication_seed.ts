@@ -1,19 +1,20 @@
-// import { Knex } from "knex";
+import { Knex } from "knex";
 
-// const tableName = 'authentication'
+const tableName = 'authentication'
 
-// export async function seed(knex: Knex): Promise<void> {
-//     // Deletes ALL existing entries
-//     await knex(tableName).del();
-
-//     // Inserts seed entries
-//     await knex(tableName).insert([
-//         { 
-//             email: "QueijoBom@Hotmail.com", 
-//             password: "QueijoBom",
-//             cpf: "715.615.921-18",
-//             username: "Abacaxi Com Queijo" 
-//         }
-        
-//     ]);
-// };
+export async function seed(knex: Knex): Promise<void> {
+    // Deletes ALL existing entries
+    await knex(tableName).del();
+    
+    const leader_id = '2780f23f-8a44-4a06-85c9-c14f1487f626';
+    // Inserts seed entries
+    await knex(tableName).insert(
+        { 
+            email: "admin.clube@nandin.com", 
+            password: "clubi123",
+            cpf: "71561592118",
+            username: "admin",
+            user_id: leader_id,
+        } 
+    );
+};

@@ -8,8 +8,9 @@ export async function up(knex: Knex): Promise<void> {
         table.string('email').unique().notNullable();
         table.string('password').notNullable();
         // will save with points ? if true, 11 is the length
-        table.string('cpf',11).notNullable();
+        table.string('cpf',11).unique().notNullable();
         table.string('username').unique().notNullable();
+        table.uuid('user_id').references('id').inTable('members');
     });
 }
 
