@@ -3,7 +3,7 @@ import { knex } from 'knex';
 import knexConfig from '../../knexfile';
 
 const NODE_ENV = process.env.NODE_ENV;
-if (!NODE_ENV) throw Error('No env type selected!')
+if (!NODE_ENV) throw Error('No Node Env selected!');
 
 const dbConfig = knexConfig[NODE_ENV];
 

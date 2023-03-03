@@ -5,8 +5,8 @@ const tableName = 'member_role'
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable(tableName,(table) => {
         table.increments('id').primary();
-        table.uuid('member_id').references('id').inTable('members');
-        table.integer('role_id').references('id').inTable('roles')
+        table.uuid('member_id').references('id').inTable('members').notNullable();
+        table.integer('role_id').references('id').inTable('roles').notNullable();
     });
 }
 

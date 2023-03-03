@@ -10,7 +10,7 @@ export async function up(knex: Knex): Promise<void> {
         // will save with points ? if false, 11 is the length
         table.string('cpf',11).unique().notNullable();
         table.string('username').unique().notNullable();
-        table.uuid('user_id').references('id').inTable('members');
+        table.uuid('user_id').references('id').inTable('members').notNullable();
     });
 }
 
