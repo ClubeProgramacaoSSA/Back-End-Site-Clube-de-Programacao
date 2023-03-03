@@ -1,6 +1,7 @@
 import { Router, IRouter, Application } from 'express';
 import { Route } from '../Models';
 import { testRouter } from '../Modules/Test/routes';
+import { memberRouter } from '../Modules/member/routes';
 import { routeNotFound } from '../Middlewares/notFound';
 import { errorHandler } from '../Middlewares/errorHandling';
 
@@ -25,8 +26,9 @@ export class MainRouter implements Route {
     public initRoute() {
         this.router.get('/', (req, res) => res.json({ message:'Bem-Vindo a API do Clube de Programação', hasQuack: false }));
         
-        this.router.use("/test", testRouter.initRoute());
-        
+        this.router.use("/member", memberRouter.initRoute() );
+        this.router.use("/test", testRouter.initRoute() );
+
         return this.router;
     }
 }
