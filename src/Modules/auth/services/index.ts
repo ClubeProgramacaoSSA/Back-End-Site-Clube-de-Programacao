@@ -41,10 +41,12 @@ export class AuthService {
             );
         // if(!members.length) throw new Error('Error in authentication username of password!');
         // const [member] = members;
-        
-        if(!members.length || members[0].password !== password) throw new Error('Error in authentication username or password!');
+        const [member] = members;
 
-        return members[0];
+        if(!members.length || member.password !== password) throw new Error('Error in authentication username or password!');
+        delete member.password; // don't send password to front, never do that!
+
+        return member;
     }
     public async signup({ auth, member }:{member: IMembersNoId, auth: IAuthenticationNoUserId}){
         const authenticatedMember = await this.getByUsername( auth.username );

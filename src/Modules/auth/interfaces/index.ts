@@ -13,7 +13,7 @@ export type LoginResponseType = {
   email: string;
   username: string;
   fullname: string;
-  password: string;
+  password?: string;
   gender: string;
   description: string | null;
   started_course_at: Date;
