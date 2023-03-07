@@ -6,6 +6,7 @@ import { routeNotFound } from '../Middlewares/notFound';
 import { errorHandler } from '../Middlewares/errorHandling';
 
 import cors from 'cors';
+import { authRouter } from '../Modules/auth/routes';
 
 export class MainRouter implements Route {
     private router = Router();
@@ -26,6 +27,7 @@ export class MainRouter implements Route {
     public initRoute() {
         this.router.get('/', (req, res) => res.json({ message:'Bem-Vindo a API do Clube de Programação', hasQuack: false }));
         
+        this.router.use("/auth", authRouter.initRoute())
         this.router.use("/member", memberRouter.initRoute() );
         this.router.use("/test", testRouter.initRoute() );
 

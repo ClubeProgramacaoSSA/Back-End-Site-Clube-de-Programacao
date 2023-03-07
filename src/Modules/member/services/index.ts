@@ -1,7 +1,7 @@
 import { Knex } from "knex";
 import { connection } from "../../../Db/knex";
 import { IBaseCrudService } from "../../../Models";
-import { IMembers } from '../interfaces';
+import { IMembers, IMembersNoId } from '../interfaces';
 
 class MemberService {
     private tableName = 'members';
@@ -11,20 +11,25 @@ class MemberService {
         this.kxConnection = connection;
     }
 
-    async create(member: IMembers) {
-        // should create member and return it`s Id;
-        try {
-            const [memberWithId] = await this.kxConnection(this.tableName)
-                .insert(member, ['id']) as Array<{ id: string } | undefined>;
+    // should create member and return it`s Id;
+    async create(member: IMembersNoId) {
 
-            if (memberWithId) {
-                console.log(`Member Id`, memberWithId?.id);
-                return memberWithId.id;
-            }
+        const [memberWithId] = await this.kxConnection(this.tableName).insert(member, ['id']) as Array<{ id: string } | undefined>;
 
-        } catch (err) {
-            throw new Error('Error');
+        if (!memberWithId) {
+            // console.log(`Member Id`, memberWithId?.id);
+            throw new Error('Error creating member');
         }
+        
+        return memberWithId.id;
+
+    }
+    async updateOne(memberId:string, memberPayload: Omit<Partial<IMembers>,'id'>){
+        const [ member ] = await this.kxConnection<IMembers>(this.tableName)
+            .where('id','=',memberId)
+            .update({...memberPayload}, ['id']);
+        
+        return member ? true : false;
     }
     async getBySomething(member: Partial<Omit<IMembers, 'id'>>) {
         let somethingKey = null;
@@ -40,12 +45,24 @@ class MemberService {
 
         if (!somethingKey) throw new Error(`Pass a key to use as filter`);
 
-        const members = await this.kxConnection< IMembers >(this.tableName)
+        const members = await this.kxConnection<IMembers>(this.tableName)
             .where(somethingKey, '=', somethingValue)
             .select(`*`);
-            
+
         return members;
         // if( response.length > 1 ) throw new Error(`More than one member!`);
+    }
+    async getAll() {
+        const members = await this.kxConnection(this.tableName).select('*');
+
+        return members;
+    }
+    async getById(memberId: string) {
+        const member = await this.kxConnection(this.tableName)
+            .where('id', '=', memberId)
+            .select('*');
+
+        return member;
     }
 }
 const memberService = new MemberService();

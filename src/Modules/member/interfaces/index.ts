@@ -8,3 +8,4 @@ export interface IMembers {
     'started_course_at': Date;
     'updated_at'?: Date | null;
 }
+export type IMembersNoId = Omit<IMembers,'id'>;
