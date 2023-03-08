@@ -15,7 +15,16 @@ export class AuthService {
     }
 
     private async create(auth: IAuthenticationNoId) {
-        await this.kxConnection<IAuthenticationNoId>(this.tableName).insert( auth );
+        try {
+            console.log(auth)
+            await this.kxConnection<IAuthenticationNoId>(this.tableName).insert( auth );
+            return true;
+        } catch (err) {
+            // delete member that was been created!
+            await this.kxConnection<IMembers>('members').where( 'id','=',auth.user_id ).delete();
+            // console.log('no catch ', auth.user_id)
+            throw err;
+        } 
     }
     private async getByUsername(username: string) {
         const authenticatedMember = await this.kxConnection<IAuthentication>(this.tableName).where('username','=', username).select('*');
@@ -50,12 +59,14 @@ export class AuthService {
     }
     public async signup({ auth, member }:{member: IMembersNoId, auth: IAuthenticationNoUserId}){
         const authenticatedMember = await this.getByUsername( auth.username );
+        
+        // console.log(authenticatedMember );
 
-        if(authenticatedMember.length > 0) throw new Error('Member is already existing');
+        if(authenticatedMember.length > 0) { console.log(authenticatedMember ); throw new Error('Member is already existing');}
 
         const memberId = await memberService.create({...member});
-        
-        await this.create({
+        // console.log( memberId );
+        const authenticated = await this.create({
             ...auth,
             user_id: memberId
         });

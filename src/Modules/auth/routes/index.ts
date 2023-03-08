@@ -3,10 +3,7 @@ import { Route } from '../../../Models';
 import { authService } from '../services';
 import { IMembersNoId } from '../../member/interfaces';
 import { IAuthenticationNoUserId } from '../interfaces';
-
-const mapInterface = <T = any, P = any>(t: keyof T,p: keyof P) => {
-    
-}
+import capitalize from '../../../Utils/capitalize';
 
 class AuthRouter implements Route {
 	private router = Router();
@@ -31,7 +28,6 @@ class AuthRouter implements Route {
 
             // if(!member.length) throw new Error("Username or Password incorrect")
 
-
             res.status(200).json( member );
         } catch (err) {
             next(err);
@@ -40,12 +36,13 @@ class AuthRouter implements Route {
     private async memberSignUp(req: Request,res:Response,next: NextFunction) {
         const { member,auth } = req.body as { member: IMembersNoId,auth: IAuthenticationNoUserId};
         // console.log(`testSignUp`)
+
         try {
             const ok = await authService.signup({
                 auth,
-                member
+                member: {...member,fullname: capitalize(member.fullname)}
             });
-
+            // console.log(ok)
             if(!ok) throw new Error(`Error signingUp the member`);
 
             return res.status(201).json({msg: 'Member Created Sucessfully'});

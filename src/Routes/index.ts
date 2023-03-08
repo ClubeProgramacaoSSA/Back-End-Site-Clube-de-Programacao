@@ -27,7 +27,7 @@ export class MainRouter implements Route {
     public initRoute() {
         this.router.get('/', (req, res) => res.json({ message:'Bem-Vindo a API do Clube de Programação', hasQuack: false }));
         
-        this.router.use("/auth", authRouter.initRoute())
+        this.router.use("/auth", authRouter.initRoute());
         this.router.use("/member", memberRouter.initRoute() );
         this.router.use("/test", testRouter.initRoute() );
 
