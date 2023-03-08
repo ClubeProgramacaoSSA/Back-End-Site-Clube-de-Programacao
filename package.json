@@ -9,7 +9,7 @@
     "start": "ts-node --transpile-only src/server.ts",
     "start:prod": "tsc && node build/src/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "migrate":"npx knex migrate:latest"
+    "migrate": "npx knex migrate:latest"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
@@ -20,12 +20,14 @@
     "ts-node-dev": "^2.0.0"
   },
   "dependencies": {
+    "better-sqlite3": "^8.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.2",
-    "knex": "^2.3.0",
+    "knex": "^2.4.2",
     "objection": "^3.0.1",
-    "pg": "^8.8.0",
+    "pg": "^8.9.0",
+    "sqlite3": "^5.1.4",
     "typescript": "^4.8.4"
   }
 }
