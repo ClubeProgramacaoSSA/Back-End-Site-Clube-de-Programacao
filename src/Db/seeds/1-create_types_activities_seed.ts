@@ -10,6 +10,7 @@ export async function seed(knex: Knex): Promise<void> {
     await knex(tableName).insert([
         { 
             name: "Projeto",
+<<<<<<< HEAD
         },
 
         { 
@@ -18,6 +19,21 @@ export async function seed(knex: Knex): Promise<void> {
 
         { 
             name: "Evento",
+=======
+            created_at: new Date().toISOString(),
+        },
+        { 
+            name: "Aulão",
+            created_at: new Date().toISOString(),
+        },
+        { 
+            name: "Workshop",
+            created_at: new Date().toISOString(),
+        },
+        { 
+            name: "Evento",
+            created_at: new Date().toISOString(),
+>>>>>>> 55b297ea03f020d6c0d47acfe509f55bcbcad95a
         },
        
     ]);

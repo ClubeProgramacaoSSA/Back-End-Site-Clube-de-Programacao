@@ -8,6 +8,7 @@ export async function seed(knex: Knex): Promise<void> {
 
     // Inserts seed entries
     await knex(tableName).insert([
+<<<<<<< HEAD
         { 
             name: "Capitao" 
         },
@@ -19,6 +20,21 @@ export async function seed(knex: Knex): Promise<void> {
         { 
             name: "Faz nada" 
         },
+=======
+        {
+            name: "Aluno",
+        },
+        { 
+            name: "Estagiário" 
+        },
+        { 
+            name: "Desenvolvedor" 
+        },
+        { 
+            name: "Administrador" 
+        },
+            
+>>>>>>> 55b297ea03f020d6c0d47acfe509f55bcbcad95a
         
     ]);
 };
