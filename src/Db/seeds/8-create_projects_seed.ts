@@ -7,10 +7,10 @@ export async function seed(knex: Knex): Promise<void> {
     await knex(tableName).del();
 
     const var_activity_id = await knex('activities')
-    .where('id','=',1) // projeto do site
+    .where('name','=','Projeto do site do Clube') // projeto do site
     .select('id'); 
     // console.log(var_activity_id)
-    if(!var_activity_id.length) throw new Error('Sem Atividades');
+    if(!var_activity_id) throw new Error('Sem Atividades');
 
     // Inserts seed entries
     await knex(tableName).insert([

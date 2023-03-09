@@ -17,9 +17,7 @@ export async function seed(knex: Knex): Promise<void> {
         {
             name: "JavaScript",
         },
-        {
-            name: "C",
-        },
+        { name: "C", },
         {
             name: "C#",
         },
