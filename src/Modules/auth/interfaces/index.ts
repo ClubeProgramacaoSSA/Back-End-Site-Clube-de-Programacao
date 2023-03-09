@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+
 export interface IAuthentication {
     'cpf': string;
     'email': string;
@@ -14,7 +16,10 @@ export type LoginResponseType = {
   username: string;
   fullname: string;
   password?: string;
-  gender: string;
-  description: string | null;
-  started_course_at: Date;
 };
+export interface MemberJwtPayload extends jwt.JwtPayload {
+  id: string;
+  email: string;
+  username: string;
+  fullname: string;
+}

@@ -4,7 +4,7 @@ import { authService } from '../services';
 import { IMembersNoId } from '../../member/interfaces';
 import { IAuthenticationNoUserId } from '../interfaces';
 import capitalize from '../../../Utils/capitalize';
-import { generateAccessToken } from '../../../Service/jwt';
+import { generateAccessToken, verifyAccessTokenToMember, verifyMemberTokenMiddleware  } from '../../../Service/jwt';
 
 class AuthRouter implements Route {
 	private router = Router();
@@ -12,7 +12,7 @@ class AuthRouter implements Route {
 	constructor() {}
 
     public initRoute() {
-        this.router.post('/login',this.memberLogIn);
+        this.router.post('/login', verifyMemberTokenMiddleware, this.memberLogIn);
         this.router.post('/signup',this.memberSignUp);
         // think in the tokens refresh time and how will save the refreshs;
         // this.router.post('/refresh',() => {});

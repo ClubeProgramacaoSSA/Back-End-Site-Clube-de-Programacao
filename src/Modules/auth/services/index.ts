@@ -44,9 +44,6 @@ export class AuthService {
                     this.tableName+'.password',
                     'members.id',
                     'members.fullname',
-                    'members.gender',
-                    'members.description',
-                    'members.started_course_at',
             );
         // if(!members.length) throw new Error('Error in authentication username of password!');
         // const [member] = members;
