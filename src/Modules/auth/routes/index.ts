@@ -4,6 +4,7 @@ import { authService } from '../services';
 import { IMembersNoId } from '../../member/interfaces';
 import { IAuthenticationNoUserId } from '../interfaces';
 import capitalize from '../../../Utils/capitalize';
+import { generateAccessToken } from '../../../Service/jwt';
 
 class AuthRouter implements Route {
 	private router = Router();
@@ -21,14 +22,14 @@ class AuthRouter implements Route {
 
     private async memberLogIn(req: Request,res:Response,next: NextFunction) {
         const logInBody = req.body as {username: string, password: string}
-        // console.log('memberLOgin')
+        
         try {
             const member = await authService.login( logInBody );
             // console.log(member)
 
             // if(!member.length) throw new Error("Username or Password incorrect")
-
-            res.status(200).json( member );
+            
+            return res.status(200).json( { token: generateAccessToken( member ) } );
         } catch (err) {
             next(err);
         }

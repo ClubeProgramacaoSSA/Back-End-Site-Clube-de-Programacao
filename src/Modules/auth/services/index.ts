@@ -1,7 +1,7 @@
 import { IBaseCrudService } from "../../../Models";
 import { IMembers, IMembersNoId } from '../../member/interfaces';
 import { IAuthentication,IAuthenticationNoId, IAuthenticationNoUserId,LoginResponseType } from '../interfaces';
-import { generateAccessToken,APP_SECRET } from '../../../Service/jwt';
+import { generateAccessToken } from '../../../Service/jwt';
 import { memberService } from "../../member/services";
 import { connection } from "../../../Db/knex";
 import knex, { Knex } from "knex";
